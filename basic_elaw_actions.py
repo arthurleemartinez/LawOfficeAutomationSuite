@@ -45,7 +45,3 @@ docket_date1.send_keys(entered_date)
 docket_date2.clear()
 docket_date2.send_keys(entered_date)
 driver.get(urlform3)
-
-
-
-

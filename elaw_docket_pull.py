@@ -53,6 +53,7 @@ urlform3_XPATH = "//*[@id=\"menu0\"]"
 driver.find_element_by_xpath(urlform3_XPATH).click()
 
 def print2():
-    keyboard.press_and_release('ctrl+p')
-    keyboard.press_and_release(Keys.ENTER)
+    keyboard.press_and_release('cmd+p')
+    keyboard.press_and_release('enter')
 print2()
+driver.close()

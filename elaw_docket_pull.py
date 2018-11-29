@@ -23,8 +23,8 @@ access_server_XPATH = "/html/body/form/table/tbody/tr[2]/td[1]/div/div/table/tbo
 user1 = driver.find_element_by_xpath(user1_XPATH)
 pass1 = driver.find_element_by_xpath(pass1_XPATH)
 access1 = driver.find_element_by_xpath(access_server_XPATH)
-user1.send_keys("Leonard.martinez")
-pass1.send_keys("51698")
+user1.send_keys("")
+pass1.send_keys("")
 access1.click()
 urlform2 = "https://www5.elawsoftware.com/1217/1217_Criminal.nsf/DocketReportSelection?OpenForm&t=1"
 urlform3 = "https://www5.elawsoftware.com/1217/1217_Criminal.nsf/DocketReportSelection?OpenForm&Seq=1&t=1"

@@ -12,6 +12,23 @@ import keyboard
 from selenium import webdriver
 from bs4 import BeautifulSoup
 from _datetime import datetime
+import datetime
+import holidays
+
+ONE_DAY = datetime.timedelta(days=1)
+HOLIDAYS_US = holidays.US()
+
+def next_business_day():
+    next_day = datetime.date.today() + ONE_DAY
+    while next_day.weekday() in holidays.WEEKEND or next_day in HOLIDAYS_US:
+        next_day += ONE_DAY
+        day = str(next_day.day)
+        d1 = "/"
+        month = str(next_day.month)
+        yr = str(next_day.year)
+        reformatted = month + d1 + day + d1 + yr
+    return reformatted
+
 
 
 driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
@@ -32,7 +49,6 @@ access1.click()
 urlform2 = "https://www5.elawsoftware.com/1217/1217_Criminal.nsf/DocketReportSelection?OpenForm&t=1"
 urlform3 = "https://www5.elawsoftware.com/1217/1217_Criminal.nsf/DocketReportSelection?OpenForm&Seq=1&t=1"
 driver.get(urlform2)
-
 #date logic
 dt = datetime.now()
 tmrw_day_int = int(dt.day) + 1
@@ -40,7 +56,7 @@ tmrw_day = str(tmrw_day_int)
 tmrw_month = str(dt.month)
 tmrw_yr = str(dt.year)
 ds = "/"
-entered_date = tmrw_month + ds + tmrw_day + ds +tmrw_yr
+entered_date = next_business_day()
 docket_date1 = driver.find_element_by_xpath("/html/body/form/div[3]/table/tbody/tr[6]/td/font[1]/input")
 docket_date2 = driver.find_element_by_xpath("/html/body/form/div[3]/table/tbody/tr[6]/td/font[2]/input")
 

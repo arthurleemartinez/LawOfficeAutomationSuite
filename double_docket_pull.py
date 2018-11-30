@@ -49,13 +49,6 @@ access1.click()
 urlform2 = "https://www5.elawsoftware.com/1217/1217_Criminal.nsf/DocketReportSelection?OpenForm&t=1"
 urlform3 = "https://www5.elawsoftware.com/1217/1217_Criminal.nsf/DocketReportSelection?OpenForm&Seq=1&t=1"
 driver.get(urlform2)
-#date logic
-dt = datetime.now()
-tmrw_day_int = int(dt.day) + 1
-tmrw_day = str(tmrw_day_int)
-tmrw_month = str(dt.month)
-tmrw_yr = str(dt.year)
-ds = "/"
 entered_date = next_business_day()
 docket_date1 = driver.find_element_by_xpath("/html/body/form/div[3]/table/tbody/tr[6]/td/font[1]/input")
 docket_date2 = driver.find_element_by_xpath("/html/body/form/div[3]/table/tbody/tr[6]/td/font[2]/input")

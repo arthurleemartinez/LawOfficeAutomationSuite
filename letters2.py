@@ -49,7 +49,7 @@ arrest_date_path = "/html/body/table[2]/tbody/tr/td[2]/table[1]/tbody/tr/td[2]/t
 booking_address_xpath = "//*[@id=\":f0\"]/div[1]/div[2]/div[2]/div/div[2]/div/p[17]/span[2]"
 defendant_notes_xpath = "//*[@id=\":f0\"]/div[1]/div[2]/div[2]/div/div[2]/div/p[28]/span[1]/text()"
 driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
-pass00 = "LM13142750"
+pass00 = ""
 user01 = "Leonard.martinez"
 pass01 = "51698"
 user00 = "lawofficeofleonardmartinezdocu@gmail.com"

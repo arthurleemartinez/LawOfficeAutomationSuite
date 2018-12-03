@@ -32,6 +32,8 @@ from _datetime import datetime
 import datetime
 import holidays
 
+driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
+
 
 def business_day():
     ONE_DAY = datetime.timedelta(days=0)
@@ -73,52 +75,38 @@ def business_day():
     return reformatted
 
 
-# define rendered locations on webpage for pdf
-lnf_name_global_path = "/html/body/table[2]/tbody/tr/td[2]/table[1]/tbody/tr/td[2]/table[4]/tbody/tr/td/table[1]/tbody/tr[4]/td/div/div[1]/div/div[2]/div/div[2]/div/p[5]/span[2]"
-date_xpath = "//*[@id=\"ember172\"]"
-defendent_lnf_name_xpath = "//*[@id=\"ember174\"]"
-defendent_name_xpath = "//*[@id=\"ember182\"]"
-DOB_XPATH = "//*[@id=\"ember178\"]"
-booking_xpath = "//*[@id=\"ember176\"]"
-last_name_xpath = "//*[@id=\"ember184\"]"
-# open chrome driver at pdf page and login
-driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
-driver.get(
-    'https://dochub.com/law-office0961bb88/prwy2p/client-contact-letter-english?gdiExists=true')  # put here the address of your page
-# find the elements to click and interact with
-user1_string = "lawofficeofleonardmartinezdocu@gmail.com"
-pass1_string = ""
-login_xpath = "//*[@id=\"ember3\"]/div[2]/div/p/a"
-user1_xpath = "//*[@id=\"ember47\"]"
-pass_xpath = "//*[@id=\"ember48\"]"
-signin_xpath = "//*[@id=\"dh-email-login-btn\"]"
-login = driver.find_element_by_xpath(login_xpath)
-user1 = driver.find_element_by_xpath(user1_xpath)
-pass1 = driver.find_element_by_xpath(pass_xpath)
-sign_in = driver.find_element_by_xpath(signin_xpath)
-user1.send_keys(user1_string)
-pass1.send_keys(pass1_string)
-sign_in.click()
-# define elements in webpage pdf
-date = driver.find_element_by_xpath(date_xpath)
-defendent_lnf_name = driver.find_element_by_xpath(defendent_lnf_name_xpath)
-defendent_name = driver.find_element_by_xpath(defendent_name_xpath)
-DOB = driver.find_element_by_xpath(DOB_XPATH)
-booking = driver.find_element_by_xpath(booking_xpath)
-last_name = driver.find_element_by_xpath(last_name_xpath)
-documents_xpath = "//*[@id=\"appt_actions\"]/ul/li[1]/a"
-entered_date = business_day()
-
-driver.close()
-
-booking_global = ""
-
 wait = WebDriverWait(driver, 10)
 
 
+def open_dochub():
+    # open chrome driver at pdf page and login
+    driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
+    driver.get(
+        'https://dochub.com/law-office0961bb88/prwy2p/client-contact-letter-english?gdiExists=true')  # put here the address of your page
+    # find the elements to click and interact with
+    user1_string = "lawofficeofleonardmartinezdocu@gmail.com"
+    pass1_string = ""
+    login_xpath = "//*[@id=\"ember3\"]/div[2]/div/p/a"
+    user1_xpath = "//*[@id=\"ember47\"]"
+    pass_xpath = "//*[@id=\"ember48\"]"
+    signin_xpath = "//*[@id=\"dh-email-login-btn\"]"
+    login = driver.find_element_by_xpath(login_xpath)
+    user1 = driver.find_element_by_xpath(user1_xpath)
+    pass1 = driver.find_element_by_xpath(pass_xpath)
+    sign_in = driver.find_element_by_xpath(signin_xpath)
+    user1.send_keys(user1_string)
+    pass1.send_keys(pass1_string)
+    sign_in.click()
+
+
+booking_global = ""
+
+
+# Open_amp -> apppointment_iteration ->find defendent info -> open gmail -> booker -> open dochub -> replace_dochub_values() -> print dochub letters()
+
 def open_amp():
     driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
-    driver.execute_script(
+    driver.get(
         "window.open('https://idc.traviscountytx.gov/nidp/idff/sso?id=35&sid=2&option=credential&sid=2&target=https%3A%2F%2Fcourts.traviscountytx.gov%2Famp%2F');")
     user1_XPATH = "//*[@id=\"main_content\"]/div[2]/form/input[1]"
     pass1_XPATH = "//*[@id=\"main_content\"]/div[2]/form/input[2]"
@@ -131,7 +119,7 @@ def open_amp():
     wait.until(EC.presence_of_element_located((By.XPATH, access_server_XPATH)))
     access1 = driver.find_element_by_xpath(access_server_XPATH)
     user1.send_keys("Sbn13142750")
-    pass1.send_keys("Lm13142750*")
+    pass1.send_keys("")
     access1.click()
     driver.get("https://courts.traviscountytx.gov/AMP/Cases/Search")
     xpath_startdate = "//*[@id=\"start\"]"
@@ -356,6 +344,55 @@ def appointment_iteration():
         else:
             pass
 
+    find_defendent_info()
 
+
+entered_date = business_day()
+
+# define rendered locations on webpage for pdf
+edit_template_path = "//*[@id=\"js-toolbar\"]/div[1]/ul[3]/li[1]/button"
+lnf_name_global_path = "/html/body/table[2]/tbody/tr/td[2]/table[1]/tbody/tr/td[2]/table[4]/tbody/tr/td/table[1]/tbody/tr[4]/td/div/div[1]/div/div[2]/div/div[2]/div/p[5]/span[2]"
+date_xpath = "//*[@id=\"ember776\"]"
+printer_hub_selector = "#ember540"
+printer_path = "//*[@id=\"ember540\"]"
+defendent_lnf_name_xpath = "//*[@id=\"ember492\"]"
+defendent_name_xpath = "//*[@id=\"ember499\"]"
+DOB_XPATH = "//*[@id=\"ember502\"]"
+booking_xpath = "//*[@id=\"ember129\"]/div[2]"
+last_name_xpath = "//*[@id=\"ember512\"]"
+
+documents_xpath = "//*[@id=\"appt_actions\"]/ul/li[1]/a"
+
+
+def dochub1():
+    open_dochub()
+    wait.until(EC.presence_of_element_located(By.XPATH, edit_template_path))
+    driver.find_element_by_xpath(edit_template_path).click()
+    wait.until(EC.presence_of_element_located(By.XPATH, date_xpath))
+    # define elements in webpage pdf
+    date = driver.find_element_by_xpath(date_xpath)
+    date.clear().send_keys(business_day())
+    defendent_lnf_name = driver.find_element_by_xpath(defendent_lnf_name_xpath)
+    defendent_lnf_name.clear().send_keys(lnf_name_global1)
+    defendent_name = driver.find_element_by_xpath(defendent_name_xpath)
+    wait.until(EC.presence_of_element_located(By.XPATH, defendent_name_xpath))
+    defendent_name.clear().send_keys(legalname_global1)
+    DOB = driver.find_element_by_xpath(DOB_XPATH)
+    DOB.clear().send_keys(DOB_global1)
+    wait.until(EC.presence_of_element_located(By.XPATH, defendent_name_xpath))
+    booking = driver.find_element_by_xpath(booking_xpath)
+    booking.clear().send_keys(booking_global1)
+    last_name = driver.find_element_by_xpath(last_name_xpath)
+    last_name.clear().send_keys(last_name_global1)
+    wait.until(EC.presence_of_element_located(By.XPATH, printer_path))
+    print1 = driver.find_element_by_xpath(printer_path)
+    print1.click()
+    print2 = "//*[@id=\"print-header\"]/div/button[1]"
+    wait.until(EC.presence_of_element_located(By.XPATH, print2))
+    printy = driver.find_element_by_xpath(print2).click()
+    time.sleep(10)
+
+
+open_amp()
 time.sleep(15 * 60)
 driver.close()

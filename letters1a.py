@@ -119,7 +119,7 @@ def open_amp():
     wait.until(EC.presence_of_element_located((By.XPATH, access_server_XPATH)))
     access1 = driver.find_element_by_xpath(access_server_XPATH)
     user1.send_keys("Sbn13142750")
-    pass1.send_keys("")
+    pass1.send_keys("*")
     access1.click()
     driver.get("https://courts.traviscountytx.gov/AMP/Cases/Search")
     xpath_startdate = "//*[@id=\"start\"]"
@@ -224,7 +224,6 @@ def appointment_iteration():
             booker = driver.find_element_by_xpath(booking_global_xpath).text
             booking_global1 = booker
             open_gmail()
-
             def booker_tool():  # must follow open gmail function call
                 wait.until(EC.presence_of_element_located(By.XPATH, gmailht_searchpath))
                 gmailht_search = driver.find_element_by_xpath(gmailht_searchpath)
@@ -232,7 +231,6 @@ def appointment_iteration():
                 wait.until(EC.presence_of_element_located(By.XPATH, gmailht_searchbtnpath))
                 gmail_srch_button = driver.find_element_by_xpath(gmailht_searchbtnpath)
                 gmail_srch_button.click()
-
             booker_tool()
             wait.until(EC.presence_of_element_located(By.XPATH, lnf_name_global_path))
             lnf_name_global1 = driver.find_element_by_xpath(lnf_name_global_path).text  # final lnf name for defendent 1
@@ -240,7 +238,7 @@ def appointment_iteration():
             DOB_global1 = driver.find_element_by_xpath(def_DOB).text  # final dob for defendent 1
             last_name_global1 = last_name1.split(sep, 1)[0]  # USE FOR FINAL LAST NAME VALUE
             legalname_global1 = str(last_name1.split(sep, 1)[1]) + str(last_name1.split(sep, 1)[0])  # FINAL LEGAL NAME
-
+            dochub1()
         elif (check_exists_by_xpath(second_appointment_xpath) == True):
             wait.until(EC.presence_of_element_located(By.XPATH, second_appointment_xpath))
             appointment = driver.find_element_by_xpath(second_appointment_xpath)
@@ -265,7 +263,7 @@ def appointment_iteration():
             DOB_global2 = driver.find_element_by_xpath(def_DOB).text  # final dob for defendent 1
             last_name_global2 = last_name1.split(sep, 1)[0]  # USE FOR FINAL LAST NAME VALUE
             legalname_global2 = str(last_name1.split(sep, 1)[1]) + str(last_name1.split(sep, 1)[0])  # FINAL LEGAL NAME
-
+            dochub2()
         elif (check_exists_by_xpath(third_appointment_xpath) == True):
             wait.until(EC.presence_of_element_located(By.XPATH, third_appointment_xpath))
             appointment = driver.find_element_by_xpath(third_appointment_xpath)
@@ -290,7 +288,7 @@ def appointment_iteration():
             DOB_global3 = driver.find_element_by_xpath(def_DOB).text  # final dob for defendent 1
             last_name_global3 = last_name1.split(sep, 1)[0]  # USE FOR FINAL LAST NAME VALUE
             legalname_global3 = str(last_name1.split(sep, 1)[1]) + str(last_name1.split(sep, 1)[0])  # FINAL LEGAL NAME
-
+            dochub3()
         elif (check_exists_by_xpath(fourth_appointment_xpath) == True):
             wait.until(EC.presence_of_element_located(By.XPATH, fourth_appointment_xpath))
             appointment = driver.find_element_by_xpath(fourth_appointment_xpath)
@@ -315,7 +313,7 @@ def appointment_iteration():
             DOB_global4 = driver.find_element_by_xpath(def_DOB).text  # final dob for defendent 1
             last_name_global4 = last_name1.split(sep, 1)[0]  # USE FOR FINAL LAST NAME VALUE
             legalname_global4 = str(last_name1.split(sep, 1)[1]) + str(last_name1.split(sep, 1)[0])  # FINAL LEGAL NAME
-
+            dochub4()
         elif (check_exists_by_xpath(fifth_appointment_xpath) == True):
             wait.until(EC.presence_of_element_located(By.XPATH, fifth_appointment_xpath))
             appointment = driver.find_element_by_xpath(fifth_appointment_xpath)
@@ -324,7 +322,6 @@ def appointment_iteration():
             booker = driver.find_element_by_xpath(booking_global_xpath).text
             booking_global5 = booker
             open_gmail()
-
             def booker_tool():  # must follow open gmail function call
                 wait.until(EC.presence_of_element_located(By.XPATH, gmailht_searchpath))
                 gmailht_search = driver.find_element_by_xpath(gmailht_searchpath)
@@ -332,7 +329,6 @@ def appointment_iteration():
                 wait.until(EC.presence_of_element_located(By.XPATH, gmailht_searchbtnpath))
                 gmail_srch_button = driver.find_element_by_xpath(gmailht_searchbtnpath)
                 gmail_srch_button.click()
-
             booker_tool()
             wait.until(EC.presence_of_element_located(By.XPATH, lnf_name_global_path))
             lnf_name_global5 = driver.find_element_by_xpath(lnf_name_global_path).text  # final lnf name for defendent 1
@@ -340,7 +336,8 @@ def appointment_iteration():
             DOB_global5 = driver.find_element_by_xpath(def_DOB).text  # final dob for defendent 1
             last_name_global5 = last_name1.split(sep, 1)[0]  # USE FOR FINAL LAST NAME VALUE
             legalname_global5 = str(last_name1.split(sep, 1)[1]) + str(last_name1.split(sep, 1)[0])  # FINAL LEGAL NAME
-
+            dochub5()
+        
         else:
             pass
 
@@ -390,9 +387,116 @@ def dochub1():
     print2 = "//*[@id=\"print-header\"]/div/button[1]"
     wait.until(EC.presence_of_element_located(By.XPATH, print2))
     printy = driver.find_element_by_xpath(print2).click()
-    time.sleep(10)
+    time.sleep(3)
 
-
+def dochub2():
+    open_dochub()
+    wait.until(EC.presence_of_element_located(By.XPATH, edit_template_path))
+    driver.find_element_by_xpath(edit_template_path).click()
+    wait.until(EC.presence_of_element_located(By.XPATH, date_xpath))
+    # define elements in webpage pdf
+    date = driver.find_element_by_xpath(date_xpath)
+    date.clear().send_keys(business_day())
+    defendent_lnf_name = driver.find_element_by_xpath(defendent_lnf_name_xpath)
+    defendent_lnf_name.clear().send_keys(lnf_name_global2)
+    defendent_name = driver.find_element_by_xpath(defendent_name_xpath)
+    wait.until(EC.presence_of_element_located(By.XPATH, defendent_name_xpath))
+    defendent_name.clear().send_keys(legalname_global2)
+    DOB = driver.find_element_by_xpath(DOB_XPATH)
+    DOB.clear().send_keys(DOB_global2)
+    wait.until(EC.presence_of_element_located(By.XPATH, defendent_name_xpath))
+    booking = driver.find_element_by_xpath(booking_xpath)
+    booking.clear().send_keys(booking_global2)
+    last_name = driver.find_element_by_xpath(last_name_xpath)
+    last_name.clear().send_keys(last_name_global2)
+    wait.until(EC.presence_of_element_located(By.XPATH, printer_path))
+    print1 = driver.find_element_by_xpath(printer_path)
+    print1.click()
+    print2 = "//*[@id=\"print-header\"]/div/button[1]"
+    wait.until(EC.presence_of_element_located(By.XPATH, print2))
+    printy = driver.find_element_by_xpath(print2).click()
+    time.sleep(3)
+def dochub3():
+    open_dochub()
+    wait.until(EC.presence_of_element_located(By.XPATH, edit_template_path))
+    driver.find_element_by_xpath(edit_template_path).click()
+    wait.until(EC.presence_of_element_located(By.XPATH, date_xpath))
+    # define elements in webpage pdf
+    date = driver.find_element_by_xpath(date_xpath)
+    date.clear().send_keys(business_day())
+    defendent_lnf_name = driver.find_element_by_xpath(defendent_lnf_name_xpath)
+    defendent_lnf_name.clear().send_keys(lnf_name_global3)
+    defendent_name = driver.find_element_by_xpath(defendent_name_xpath)
+    wait.until(EC.presence_of_element_located(By.XPATH, defendent_name_xpath))
+    defendent_name.clear().send_keys(legalname_global3)
+    DOB = driver.find_element_by_xpath(DOB_XPATH)
+    DOB.clear().send_keys(DOB_global3)
+    wait.until(EC.presence_of_element_located(By.XPATH, defendent_name_xpath))
+    booking = driver.find_element_by_xpath(booking_xpath)
+    booking.clear().send_keys(booking_global3)
+    last_name = driver.find_element_by_xpath(last_name_xpath)
+    last_name.clear().send_keys(last_name_global3)
+    wait.until(EC.presence_of_element_located(By.XPATH, printer_path))
+    print1 = driver.find_element_by_xpath(printer_path)
+    print1.click()
+    print2 = "//*[@id=\"print-header\"]/div/button[1]"
+    wait.until(EC.presence_of_element_located(By.XPATH, print2))
+    printy = driver.find_element_by_xpath(print2).click()
+    time.sleep(3)    
+def dochub4():
+    open_dochub()
+    wait.until(EC.presence_of_element_located(By.XPATH, edit_template_path))
+    driver.find_element_by_xpath(edit_template_path).click()
+    wait.until(EC.presence_of_element_located(By.XPATH, date_xpath))
+    # define elements in webpage pdf
+    date = driver.find_element_by_xpath(date_xpath)
+    date.clear().send_keys(business_day())
+    defendent_lnf_name = driver.find_element_by_xpath(defendent_lnf_name_xpath)
+    defendent_lnf_name.clear().send_keys(lnf_name_global4)
+    defendent_name = driver.find_element_by_xpath(defendent_name_xpath)
+    wait.until(EC.presence_of_element_located(By.XPATH, defendent_name_xpath))
+    defendent_name.clear().send_keys(legalname_global4)
+    DOB = driver.find_element_by_xpath(DOB_XPATH)
+    DOB.clear().send_keys(DOB_global4)
+    wait.until(EC.presence_of_element_located(By.XPATH, defendent_name_xpath))
+    booking = driver.find_element_by_xpath(booking_xpath)
+    booking.clear().send_keys(booking_global4)
+    last_name = driver.find_element_by_xpath(last_name_xpath)
+    last_name.clear().send_keys(last_name_global4)
+    wait.until(EC.presence_of_element_located(By.XPATH, printer_path))
+    print1 = driver.find_element_by_xpath(printer_path)
+    print1.click()
+    print2 = "//*[@id=\"print-header\"]/div/button[1]"
+    wait.until(EC.presence_of_element_located(By.XPATH, print2))
+    printy = driver.find_element_by_xpath(print2).click()
+    time.sleep(3)
+def dochub5():
+    open_dochub()
+    wait.until(EC.presence_of_element_located(By.XPATH, edit_template_path))
+    driver.find_element_by_xpath(edit_template_path).click()
+    wait.until(EC.presence_of_element_located(By.XPATH, date_xpath))
+    # define elements in webpage pdf
+    date = driver.find_element_by_xpath(date_xpath)
+    date.clear().send_keys(business_day())
+    defendent_lnf_name = driver.find_element_by_xpath(defendent_lnf_name_xpath)
+    defendent_lnf_name.clear().send_keys(lnf_name_global5)
+    defendent_name = driver.find_element_by_xpath(defendent_name_xpath)
+    wait.until(EC.presence_of_element_located(By.XPATH, defendent_name_xpath))
+    defendent_name.clear().send_keys(legalname_global5)
+    DOB = driver.find_element_by_xpath(DOB_XPATH)
+    DOB.clear().send_keys(DOB_global5)
+    wait.until(EC.presence_of_element_located(By.XPATH, defendent_name_xpath))
+    booking = driver.find_element_by_xpath(booking_xpath)
+    booking.clear().send_keys(booking_global5)
+    last_name = driver.find_element_by_xpath(last_name_xpath)
+    last_name.clear().send_keys(last_name_global5)
+    wait.until(EC.presence_of_element_located(By.XPATH, printer_path))
+    print1 = driver.find_element_by_xpath(printer_path)
+    print1.click()
+    print2 = "//*[@id=\"print-header\"]/div/button[1]"
+    wait.until(EC.presence_of_element_located(By.XPATH, print2))
+    printy = driver.find_element_by_xpath(print2).click()
+    time.sleep(3)    
 open_amp()
 time.sleep(15 * 60)
 driver.close()

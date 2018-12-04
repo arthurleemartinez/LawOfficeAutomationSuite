@@ -18,15 +18,19 @@ import holidays
 ONE_DAY = datetime.timedelta(days=1)
 HOLIDAYS_US = holidays.US()
 
+
 def next_business_day():
     next_day = datetime.date.today() + ONE_DAY
+    global reformatted
+    reformatted = ""
     while next_day.weekday() in holidays.WEEKEND or next_day in HOLIDAYS_US:
         next_day += ONE_DAY
         day = str(next_day.day)
         d1 = "/"
         month = str(next_day.month)
         yr = str(next_day.year)
-        reformatted = month + d1 + day + d1 + yr
+        asd = month + d1 + day + d1 + yr
+        reformatted = asd
     return reformatted
 
 
@@ -44,7 +48,7 @@ user1 = driver.find_element_by_xpath(user1_XPATH)
 pass1 = driver.find_element_by_xpath(pass1_XPATH)
 access1 = driver.find_element_by_xpath(access_server_XPATH)
 user1.send_keys("Leonard.martinez")
-pass1.send_keys("51698")
+pass1.send_keys("")
 access1.click()
 urlform2 = "https://www5.elawsoftware.com/1217/1217_Criminal.nsf/DocketReportSelection?OpenForm&t=1"
 urlform3 = "https://www5.elawsoftware.com/1217/1217_Criminal.nsf/DocketReportSelection?OpenForm&Seq=1&t=1"
@@ -104,5 +108,5 @@ def tcdj1():
     check = driver.find_element_by_xpath(xpath_checkbox)
     check.click()
     keyboard.press_and_release('ctrl+shift+p')
-    time.sleep(5)
+    time.sleep(15)
 tcdj1()

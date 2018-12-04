@@ -159,7 +159,7 @@ gender_global_path = "//*[@id=\":eq\"]/div[1]/div[2]/div[2]/div/div[2]/div/p[24]
 sheriff_booking_path = "//*[@id=\"InmateCharges\"]/text()[1]"
 documents_xpath = "//*[@id=\"appt_actions\"]/ul/li[1]/a"
 open_docs_url = "https://docs.google.com/document/d/15Qk0UM2f9G7glB0BOL-hPeN86o_YN9YjfRvj53riBMQ/edit?usp=sharing"
-sign_in_docs_path = "//*[@id=\"gb\"]/div/div/a"
+sign_in_docs_path: str = "//*[@id=\"gb\"]/div/div/a"
 docs_email_path = "//*[@id=\"identifierId\"]"
 docs_pass_path = "//*[@id=\"password\"]/div[1]/div/div[1]/input"
 docs_next_path = "//*[@id=\"passwordNext\"]"
@@ -189,7 +189,16 @@ user01 = "Leonard.martinez"
 pass01 = ""
 user00 = "lawofficeofleonardmartinezdocu@gmail.com"
 case_elaw_save_close_path: str = "/html/body/form/div[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td/a[1]"
-
+elaw_1_url = "https://www5.elawsoftware.com/"
+global global_one_exists, global_2_exists, global_3_exists, pe, global_4_exists, global_5_exists
+global_one_exists = 0
+global_2_exists = 0
+pe = " (A)"
+global_3_exists = 0
+global_4_exists = 0
+global_5_exists = 0
+global no_hyphens_dob_global4, no_hyphens_dob_global4, no_hyphens_dob_global3, no_hyphens_dob_global2
+no_hyphens_dob_global4 = re.sub('-', '', DOB_global4)
 global wait
 wait = WebDriverWait(driver, 10)
 global am9
@@ -634,15 +643,6 @@ def replace_doc_values_and_print():
     driver.find_element_by_xpath(path_closer1).click()
 
 
-elaw_1_url = "https://www5.elawsoftware.com/"
-global_one_exists = 0
-global_2_exists = 0
-pe = " (A)"
-global_3_exists = 0
-global_4_exists = 0
-global_5_exists = 0
-global no_hyphens_dob_global4, no_hyphens_dob_global4, no_hyphens_dob_global3, no_hyphens_dob_global2
-no_hyphens_dob_global4 = re.sub('-', '', DOB_global4)
 
 third_case_court_path = "/html/body/table[2]/tbody/tr/td[2]/table[1]/tbody/tr/td[2]/table[4]/tbody/tr/td/table[1]/tbody/tr[4]/td/div/div[1]/div/div[2]/div/div[2]/div/table[3]/tbody/tr/td[4]/p/span"
 
@@ -1514,7 +1514,7 @@ def create_elaw_appointments():
     def insert_state5():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_state_path))
         elaw_state1 = driver.find_element_by_xpath(elaw_state_path)
-        elaw_state1.send_keys(globalstate_5)  
+        elaw_state1.send_keys(globalstate_5)
 
     def insert_city1():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_city_path))
@@ -1539,7 +1539,7 @@ def create_elaw_appointments():
     def insert_city5():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_city_path))
         city1 = driver.find_element_by_xpath(elaw_city_path)
-        city1.send_keys(globalcity_5) 
+        city1.send_keys(globalcity_5)
 
     def insert_first_address1():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_first_address_path))
@@ -1767,11 +1767,11 @@ def create_elaw_appointments():
         # about 15 individual boxes (instance objects)
         insert_booking_number1()
         insert_datenamez1()
-        insert_dob1() 
-        insert_email1()  
-        insert_alternate_phone1() 
-        insert_home_phone1()  
-        insert_last_name1() 
+        insert_dob1()
+        insert_email1()
+        insert_alternate_phone1()
+        insert_home_phone1()
+        insert_last_name1()
         insert_zip1()
         insert_state1()
         insert_city1()
@@ -1781,78 +1781,78 @@ def create_elaw_appointments():
 
     # for the second in list of up to 5
     def wait_and_replace_elements2():  # function for second defendant only
-        insert_jail_status()  
-        insert_appt_status() 
+        insert_jail_status()
+        insert_appt_status()
         insert_salutationssex()
         # about 15 individual boxes (instance objects)
-        insert_booking_number2() 
-        insert_datenamez2() 
-        insert_dob2()  
-        insert_email2() 
-        insert_alternate_phone2()  
-        insert_home_phone2()  
-        insert_last_name2() 
-        insert_zip2()  
-        insert_state2() 
-        insert_city2()  
-        insert_first_address2() 
+        insert_booking_number2()
+        insert_datenamez2()
+        insert_dob2()
+        insert_email2()
+        insert_alternate_phone2()
+        insert_home_phone2()
+        insert_last_name2()
+        insert_zip2()
+        insert_state2()
+        insert_city2()
+        insert_first_address2()
         save_elaw()
         create_elaw_case_by_case2()
 
     def wait_and_replace_elements3():  # function for second defendant only
-        insert_jail_status()  
-        insert_appt_status()   
+        insert_jail_status()
+        insert_appt_status()
         insert_salutationssex()
         # about 15 individual boxes (instance objects)
-        insert_booking_number3() 
-        insert_datenamez3()  
-        insert_dob3() 
-        insert_email3() 
-        insert_alternate_phone3()  
-        insert_home_phone3() 
-        insert_last_name3() 
-        insert_zip3() 
-        insert_state3() 
-        insert_city3()  
-        insert_first_address3() 
+        insert_booking_number3()
+        insert_datenamez3()
+        insert_dob3()
+        insert_email3()
+        insert_alternate_phone3()
+        insert_home_phone3()
+        insert_last_name3()
+        insert_zip3()
+        insert_state3()
+        insert_city3()
+        insert_first_address3()
         save_elaw()
         create_elaw_case_by_case3()
 
     def wait_and_replace_elements4():  # function for second defendent only
-        insert_jail_status()  # //
-        insert_appt_status()  # //
+        insert_jail_status()
+        insert_appt_status()
         insert_salutationssex()
         # about 15 individual boxes (instance objects)
-        insert_booking_number4()  ##//
-        insert_datenamez4()  ##//
-        insert_dob4()  ##//
-        insert_email4()  ##//
-        insert_alternate_phone4()  ##//
-        insert_home_phone4()  ##//
-        insert_last_name4()  ##//
-        insert_zip4()  ##//
-        insert_state4()  ##//
-        insert_city4()  ##//
-        insert_first_address4()  # //
+        insert_booking_number4()
+        insert_datenamez4()
+        insert_dob4()
+        insert_email4()
+        insert_alternate_phone4()
+        insert_home_phone4()
+        insert_last_name4()
+        insert_zip4()
+        insert_state4()
+        insert_city4()
+        insert_first_address4()
         save_elaw()
         create_elaw_case_by_case4()
 
     def wait_and_replace_elements5():
-        insert_jail_status()  # //
-        insert_appt_status()  # //
+        insert_jail_status()
+        insert_appt_status()
         insert_salutationssex()
         # about 15 individual boxes (instance objects)
-        insert_booking_number5()  ##//
-        insert_datenamez5()  ##//
-        insert_dob5()  ##//
-        insert_email5()  ##//
-        insert_alternate_phone5()  ##//
-        insert_home_phone5()  ##//
-        insert_last_name5()  ##//
-        insert_zip5()  ##//
-        insert_state5()  ##//
-        insert_city5()  ##//
-        insert_first_address5()  # //
+        insert_booking_number5()
+        insert_datenamez5()
+        insert_dob5()
+        insert_email5()
+        insert_alternate_phone5()
+        insert_home_phone5()
+        insert_last_name5()
+        insert_zip5()
+        insert_state5()
+        insert_city5()
+        insert_first_address5()
         save_elaw()
         create_elaw_case_by_case5()
 

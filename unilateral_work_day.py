@@ -2,22 +2,7 @@
 
 from selenium.common.exceptions import NoSuchElementException
 import time
-
-import urllib3
-import selenium
-import time
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
-import requests
-from selenium.webdriver.common.keys import Keys
-import webbrowser
-import keyboard
-from selenium import webdriver
-from bs4 import BeautifulSoup
 from _datetime import datetime
-import datetime
 import holidays
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
@@ -31,7 +16,8 @@ import datetime
 from holidays import WEEKEND, US
 import re
 global pass001
-pass001 = ""
+
+pass001 = "Lm13142750*"
 booking_global1 = ""
 booking_global2 = ""
 booking_global3 = ""
@@ -214,8 +200,11 @@ am830 = "8:30 AM"
 
 
 def next_business_day():
+    global reformatted
     ONE_DAY = datetime.timedelta(days=1)
     HOLIDAYS_US = holidays.US()
+    global asd
+    reformatted = asd
     next_day = datetime.date.today() + ONE_DAY
     while next_day.weekday() in holidays.WEEKEND or next_day in HOLIDAYS_US:
         next_day += ONE_DAY
@@ -223,7 +212,7 @@ def next_business_day():
         d1 = "/"
         month = str(next_day.month)
         yr = str(next_day.year)
-        reformatted = month + d1 + day + d1 + yr
+        asd = month + d1 + day + d1 + yr
     return reformatted
 
 
@@ -265,6 +254,7 @@ def business_day():
         global d1
         d1 = " "
         global c1
+        global c1
         c1: str = ","
         month = str(next_day.month)
         yr = str(next_day.year)
@@ -292,13 +282,14 @@ def business_day():
             month1 = "November"
         else:
             month1 = "December"
-    reformatted: str = month1 + d1 + day + c1 + d1 + yr
-    return reformatted
+    reformatted1: str = month1 + d1 + day + c1 + d1 + yr
+    return reformatted1
 
 
+global entered_date
 entered_date = business_day()
-wait = WebDriverWait(driver, 10)
 
+global booking_global
 booking_global = ""
 
 
@@ -335,18 +326,18 @@ def open_docs():
 
 def getpronoun():
     if gender_global1 == "Female":
-        global_pronoun = pn2
+        global_pronoun1 = pn2
     elif gender_global2 == "Female":
-        global_pronoun = pn2
+        global_pronoun1 = pn2
     elif gender_global3 == "Female":
-        global_pronoun = pn2
+        global_pronoun1 = pn2
     elif gender_global4 == "Female":
-        global_pronoun = pn2
+        global_pronoun1 = pn2
     elif gender_global5 == "Female":
-        global_pronoun = pn2
+        global_pronoun1 = pn2
     else:
-        global_pronoun = pn1
-    return global_pronoun
+        global_pronoun1 = pn1
+    return global_pronoun1
 
 
 def replace_doc_values_and_print():
@@ -357,6 +348,7 @@ def replace_doc_values_and_print():
     open_docs()
 
     def get_legal():
+        global legal
         if booking_global1 == booker:
             legal = legalname_global1
         elif booking_global2 == booker:
@@ -373,6 +365,7 @@ def replace_doc_values_and_print():
     legal = get_legal()
 
     def get_birthday():
+        global birthday
         if booking_global1 == booker:
             birthday = DOB_global1
         elif booking_global2 == booker:
@@ -388,6 +381,7 @@ def replace_doc_values_and_print():
     birthday = get_birthday()
 
     def get_lnf():
+        global lnf
         if booking_global1 == booker:
             lnf = lnf_name_global1
         elif booking_global2 == booker:
@@ -404,6 +398,7 @@ def replace_doc_values_and_print():
     lnf = get_lnf()
 
     def get_lasto():
+        global lasto
         if booking_global1 == booker:
             lasto = last_name_global1
         elif booking_global2 == booker:
@@ -420,6 +415,7 @@ def replace_doc_values_and_print():
     lasto = get_lasto()
 
     def get_firstname():
+        global firstname
         if booking_global1 == booker:
             firstname = global_firstname1
         elif booking_global2 == booker:
@@ -486,7 +482,7 @@ def replace_doc_values_and_print():
         return jail_status
 
     getJailStatus()
-
+    global date44, legalname44,lnf44, salutations44, booking44
     # 44 suffix means final replacement values per defendant
     date44 = orig_date + " " + entered_date
     legalname44 = orig_legalname + " " + legal
@@ -1971,10 +1967,8 @@ def double_docket_pull_call():
     # Start TCDJ Docket search print
 
     def tcdj1():
-        driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
         url_tcdj = ("https://publiccourts.traviscountytx.gov/dsa/#/")
         driver.get(url_tcdj)
-        wait = WebDriverWait(driver, 10)
         xpath_att1 = "/html/body/div/div/div/div[3]/div/span[2]/button"
         wait.until(EC.presence_of_element_located((By.XPATH, xpath_att1)))
         attorney2 = driver.find_element_by_xpath(xpath_att1)

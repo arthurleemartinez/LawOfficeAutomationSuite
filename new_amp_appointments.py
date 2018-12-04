@@ -30,7 +30,7 @@ def open_amp():
     wait.until(EC.presence_of_element_located((By.XPATH, access_server_XPATH)))
     access1 = driver.find_element_by_xpath(access_server_XPATH)
     user1.send_keys("Sbn13142750")
-    pass1.send_keys("Lm13142750*")
+    pass1.send_keys("")
     access1.click()
     driver.get("https://courts.traviscountytx.gov/AMP/Cases/Search")
     xpath_startdate = "//*[@id=\"start\"]"

@@ -4,7 +4,6 @@ from selenium.common.exceptions import NoSuchElementException
 import time
 from _datetime import datetime
 import holidays
-from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
@@ -17,7 +16,7 @@ from holidays import WEEKEND, US
 import re
 global pass001
 
-pass001 = "Lm13142750*"
+pass001 = ""
 booking_global1 = ""
 booking_global2 = ""
 booking_global3 = ""
@@ -248,6 +247,8 @@ def business_day():
     holidays_us = US()
     # next day = today because renaming variables is hard
     next_day = datetime.date.today() + one_day
+    global month1
+    month1 = ""
     while next_day.weekday() in WEEKEND or next_day in holidays_us:
         next_day += one_day
         day = str(next_day.day)
@@ -766,7 +767,7 @@ def appointment_iteration():
             wait.until(EC.presence_of_element_located(By.XPATH, second_case_time_path))
             global second_case_time
             second_case_time = driver.find_element_by_xpath(second_case_time_path).text
-            #### 3 OF 3
+            # 3 OF 3
             wait.until(EC.presence_of_element_located(By.XPATH, third_case_number_path))
             global third_case_number
             third_case_number = driver.find_element_by_xpath(third_case_number_path).text
@@ -864,7 +865,7 @@ def appointment_iteration():
             wait.until(EC.presence_of_element_located(By.XPATH, first_case_time_path))
             global first_case_time
             first_case_time = driver.find_element_by_xpath(first_case_time_path).text
-            #### 2 OF 2
+            # 2 OF 2
             wait.until(EC.presence_of_element_located(By.XPATH, second_case_number_path))
             global second_case_number
             second_case_number = driver.find_element_by_xpath(second_case_number_path).text
@@ -912,7 +913,7 @@ def appointment_iteration():
             wait.until(EC.presence_of_element_located(By.XPATH, fourth_case_time_path))
             global fourth_case_time
             fourth_case_time = driver.find_element_by_xpath(fourth_case_time_path).text
-            #### 5 OF 5
+            # 5 OF 5
             wait.until(EC.presence_of_element_located(By.XPATH, fifth_case_number_path))
             global fifth_case_number
             fifth_case_number = driver.find_element_by_xpath(fifth_case_number_path).text
@@ -1198,12 +1199,10 @@ def appointment_iteration():
     replace_doc_values_and_print()
 
 
-# Open_amp -> appointment_iteration ->find defendent info -> open gmail -> booker -> open drive -> replace_dochub_values() -> print dochub letters()
+# Open_amp -> appointment_iteration ->find defendant info -> open gmail -> booker -> open drive -> replace_dochub_values() -> print dochub letters()
 
 def open_amp():
-    driver: WebDriver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
-    driver.get(
-        "window.open('https://idc.traviscountytx.gov/nidp/idff/sso?id=35&sid=2&option=credential&sid=2&target=https%3A%2F%2Fcourts.traviscountytx.gov%2Famp%2F');")
+    driver.get("window.open('https://idc.traviscountytx.gov/nidp/idff/sso?id=35&sid=2&option=credential&sid=2&target=https%3A%2F%2Fcourts.traviscountytx.gov%2Famp%2F');")
     global user1_XPATH, pass1_XPATH, access_server_XPATH
     user1_XPATH = "//*[@id=\"main_content\"]/div[2]/form/input[1]"
     pass1_XPATH = "//*[@id=\"main_content\"]/div[2]/form/input[2]"
@@ -1314,7 +1313,7 @@ def create_elaw_appointments():
         elaw_bookingno = driver.find_element_by_xpath(elaw_bookingno_path)
         elaw_bookingno.send_keys(booking_global5)
 
-    ########## two out of twelve
+    # two out of twelve
     def insert_dob1():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_dob_path))
         elaw_dob = driver.find_element_by_xpath(elaw_dob_path)
@@ -1340,7 +1339,7 @@ def create_elaw_appointments():
         elaw_dob = driver.find_element_by_xpath(elaw_dob_path)
         elaw_dob.send_keys(DOB_global5)
 
-    ######### THREE OF TWELVE
+    # THREE OF TWELVE
     def insert_email1():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_email_path))
         elaw_email = driver.find_element_by_xpath(elaw_email_path)
@@ -1366,7 +1365,7 @@ def create_elaw_appointments():
         elaw_email = driver.find_element_by_xpath(elaw_email_path)
         elaw_email.send_keys(global_email5)
 
-    ####FOUR OF TWELVE
+    # FOUR OF TWELVE
     def insert_alternate_phone1():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_alternate_phone_path))
         elaw_alternate_phone = driver.find_element_by_xpath(elaw_alternate_phone_path)
@@ -1417,7 +1416,7 @@ def create_elaw_appointments():
         elaw_home_phone = driver.find_element_by_xpath(elaw_home_phone_path)
         elaw_home_phone.send_keys(global_homephone_5)
 
-    ########## SIX OF TWELVE
+    # SIX OF TWELVE
     def insert_datenamez1():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_first_name_path))
         elaw_first_name_box = driver.find_element_by_xpath(elaw_first_name_path)
@@ -1442,7 +1441,7 @@ def create_elaw_appointments():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_first_name_path))
         elaw_first_name_box = driver.find_element_by_xpath(elaw_first_name_path)
         elaw_first_name_box.send_keys(global_datenamez5)
-        ############### SEVEN OF TWELVE
+        # SEVEN OF TWELVE
 
     def insert_salutationssex():
         if global_pronoun == pn2:
@@ -1515,7 +1514,7 @@ def create_elaw_appointments():
     def insert_state5():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_state_path))
         elaw_state1 = driver.find_element_by_xpath(elaw_state_path)
-        elaw_state1.send_keys(globalstate_5)  ############# TEN OF TWELVE
+        elaw_state1.send_keys(globalstate_5)  
 
     def insert_city1():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_city_path))
@@ -1540,7 +1539,7 @@ def create_elaw_appointments():
     def insert_city5():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_city_path))
         city1 = driver.find_element_by_xpath(elaw_city_path)
-        city1.send_keys(globalcity_5)  ############# ELEVEN OF TWELVE
+        city1.send_keys(globalcity_5) 
 
     def insert_first_address1():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_first_address_path))
@@ -1768,11 +1767,11 @@ def create_elaw_appointments():
         # about 15 individual boxes (instance objects)
         insert_booking_number1()
         insert_datenamez1()
-        insert_dob1()  ##//
-        insert_email1()  ##//
-        insert_alternate_phone1()  ##//
-        insert_home_phone1()  ##//
-        insert_last_name1()  ##//
+        insert_dob1() 
+        insert_email1()  
+        insert_alternate_phone1() 
+        insert_home_phone1()  
+        insert_last_name1() 
         insert_zip1()
         insert_state1()
         insert_city1()
@@ -1782,40 +1781,40 @@ def create_elaw_appointments():
 
     # for the second in list of up to 5
     def wait_and_replace_elements2():  # function for second defendant only
-        insert_jail_status()  # //
-        insert_appt_status()  # //
+        insert_jail_status()  
+        insert_appt_status() 
         insert_salutationssex()
         # about 15 individual boxes (instance objects)
-        insert_booking_number2()  ##//
-        insert_datenamez2()  ##//
-        insert_dob2()  ##//
-        insert_email2()  ##//
-        insert_alternate_phone2()  ##//
-        insert_home_phone2()  ##//
-        insert_last_name2()  ##//
-        insert_zip2()  ##//
-        insert_state2()  ##//
-        insert_city2()  ##//
-        insert_first_address2()  # //
+        insert_booking_number2() 
+        insert_datenamez2() 
+        insert_dob2()  
+        insert_email2() 
+        insert_alternate_phone2()  
+        insert_home_phone2()  
+        insert_last_name2() 
+        insert_zip2()  
+        insert_state2() 
+        insert_city2()  
+        insert_first_address2() 
         save_elaw()
         create_elaw_case_by_case2()
 
     def wait_and_replace_elements3():  # function for second defendant only
-        insert_jail_status()  # //
-        insert_appt_status()  # //
+        insert_jail_status()  
+        insert_appt_status()   
         insert_salutationssex()
         # about 15 individual boxes (instance objects)
-        insert_booking_number3()  ##//
-        insert_datenamez3()  ##//
-        insert_dob3()  ##//
-        insert_email3()  ##//
-        insert_alternate_phone3()  ##//
-        insert_home_phone3()  ##//
-        insert_last_name3()  ##//
-        insert_zip3()  ##//
-        insert_state3()  ##//
-        insert_city3()  ##//
-        insert_first_address3()  # //
+        insert_booking_number3() 
+        insert_datenamez3()  
+        insert_dob3() 
+        insert_email3() 
+        insert_alternate_phone3()  
+        insert_home_phone3() 
+        insert_last_name3() 
+        insert_zip3() 
+        insert_state3() 
+        insert_city3()  
+        insert_first_address3() 
         save_elaw()
         create_elaw_case_by_case3()
 
@@ -1924,13 +1923,7 @@ def create_elaw_appointments():
 
 
 def double_docket_pull_call():
-    driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
     driver.get('https://www5.elawsoftware.com/eLawSecure.nsf/SecureLogin?ReadForm')  # put here the address of your page
-
-    user1_XPATH = "/html/body/form/table/tbody/tr[2]/td[1]/div/div/table/tbody/tr[1]/td[3]/input"
-    pass1_XPATH = "/html/body/form/table/tbody/tr[2]/td[1]/div/div/table/tbody/tr[2]/td[3]/input"
-    access_server_XPATH = "/html/body/form/table/tbody/tr[2]/td[1]/div/div/table/tbody/tr[3]/td[1]/div/input"
-
     # find the elements to click and interact with
     user1 = driver.find_element_by_xpath(user1_XPATH)
     pass1 = driver.find_element_by_xpath(pass1_XPATH)
@@ -1967,7 +1960,7 @@ def double_docket_pull_call():
     # Start TCDJ Docket search print
 
     def tcdj1():
-        url_tcdj = ("https://publiccourts.traviscountytx.gov/dsa/#/")
+        url_tcdj = "https://publiccourts.traviscountytx.gov/dsa/#/"
         driver.get(url_tcdj)
         xpath_att1 = "/html/body/div/div/div/div[3]/div/span[2]/button"
         wait.until(EC.presence_of_element_located((By.XPATH, xpath_att1)))
@@ -1998,6 +1991,7 @@ def double_docket_pull_call():
         keyboard.press_and_release('ctrl+shift+p')
         time.sleep(5)
     tcdj1()
+
 
 open_amp()
 time.sleep(10)  # this is the fuse, will automatically start appointment iteration

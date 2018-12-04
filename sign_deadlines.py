@@ -1,29 +1,8 @@
-from selenium.common.exceptions import NoSuchElementException
-import time
-import urllib3
-import selenium
-import time
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-import requests
-from selenium.webdriver.common.keys import Keys
-import webbrowser
-import keyboard
-from selenium import webdriver
-from bs4 import BeautifulSoup
-from _datetime import datetime
-import datetime
-import holidays
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains
-import keyboard
 from selenium import webdriver
-import datetime
 global savepath_amp
 savepath_amp = "//*[@id=\"required-act-save-view\"]/div[2]/div[3]/ul/li[2]/input"
 global xpath_deadline_1, xpath_deadline_2, xpath_deadline_3, xpath_deadline_1_number
@@ -48,8 +27,9 @@ letter_btn_path = "//*[@id=\"contact-method_listbox\"]/li[1]"
 contact_method_button_path = "//*[@id=\"required-act-save-view\"]/div[2]/form/div[1]/div[2]/span/span/span[1]"
 global user00, pass00
 user00 = "Sbn13142750"
-pass00 = "Lm13142750*"
-
+pass00 = ""
+global driver
+driver: WebDriver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
 def open_amp_only():
     driver: WebDriver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
     driver.get(
@@ -95,11 +75,11 @@ def check_number_of_alerts_deadline_boxes():
     elif xpath_deadline_1_number == "2" and deadline_number_2 == "2":
         deadlines_count = 2
     elif xpath_deadline_1_number == "2" and deadline_number_3 == "2":
-        deadlines_count = 3        
+        deadlines_count = 3
     elif xpath_deadline_1_number == "2" and deadline_number_4 == "2":
-        deadlines_count = 4        
+        deadlines_count = 4
     elif xpath_deadline_1_number == "2" and deadline_number_5 == "2":
-        deadlines_count = 5        
+        deadlines_count = 5
 def return_searches():
     driver.get("https://courts.traviscountytx.gov/AMP/Cases/Search")
     wait.until(EC.presence_of_element_located((By.XPATH, user1_XPATH)))
@@ -130,7 +110,7 @@ def iterate_boxes_once():
     save_amp1.click()
 def iterate_boxes_two():
     iterate_boxes_once()
-    return_searches() 
+    return_searches()
     wait.until(EC.presence_of_element_located((By.XPATH, xpath_deadline_2)))
     deadline_1_btn = driver.find_element_by_xpath(xpath_deadline_2)
     deadline_1_btn.click()
@@ -151,7 +131,7 @@ def iterate_boxes_two():
     date_of_contact.send_keys(d12)
     wait.until(EC.presence_of_element_located((By.XPATH, savepath_amp)))
     save_amp1 = driver.find_element_by_xpath(savepath_amp)
-    save_amp1.click()           
+    save_amp1.click()
 def iterate_boxes_three():
     iterate_boxes_two()
     return_searches()
@@ -199,7 +179,7 @@ def iterate_boxes_four():
     date_of_contact.send_keys(d12)
     wait.until(EC.presence_of_element_located((By.XPATH, savepath_amp)))
     save_amp1 = driver.find_element_by_xpath(savepath_amp)
-    save_amp1.click()    
+    save_amp1.click()
 def iterate_boxes_five():
     iterate_boxes_four()
     return_searches()
@@ -223,23 +203,23 @@ def iterate_boxes_five():
     date_of_contact.send_keys(d12)
     wait.until(EC.presence_of_element_located((By.XPATH, savepath_amp)))
     save_amp1 = driver.find_element_by_xpath(savepath_amp)
-    save_amp1.click()       
+    save_amp1.click()
 
 def conditional2():
-    if deadlines_count = 1:
+    if deadlines_count == 1:
         iterate_boxes_once()
-    elif deadlines_count = 2:
+    elif deadlines_count == 2:
         iterate_boxes_two()
-    elif deadlines_count = 3:
-        iterate_boxes_three()    
-    elif deadlines_count = 4:
+    elif deadlines_count == 3:
+        iterate_boxes_three()
+    elif deadlines_count == 4:
         iterate_boxes_four()
-    elif deadlines_count = 5:
+    elif deadlines_count == 5:
         iterate_boxes_five()
     else:
-        pass    
+        pass
 
 open_amp_only()
 check_number_of_alerts_deadline_boxes()
 conditional2()
-drive.close()
+driver.close()

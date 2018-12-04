@@ -15,7 +15,8 @@ import datetime
 from holidays import WEEKEND, US
 import re
 global pass001
-
+global driver
+driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
 pass001 = ""
 pn1 = "Mr. "
 global_pronoun = pn1
@@ -64,7 +65,6 @@ alternate_phone_xpath = "/html/body/table[2]/tbody/tr/td[2]/table[1]/tbody/tr/td
 arrest_date_path = "/html/body/table[2]/tbody/tr/td[2]/table[1]/tbody/tr/td[2]/table[4]/tbody/tr/td/table[1]/tbody/tr[4]/td/div/div[1]/div/div[2]/div/div[2]/div/p[18]/span[2]"
 booking_address_xpath = "//*[@id=\":f0\"]/div[1]/div[2]/div[2]/div/div[2]/div/p[17]/span[2]"
 defendant_notes_xpath = "//*[@id=\":f0\"]/div[1]/div[2]/div[2]/div/div[2]/div/p[28]/span[1]/text()"
-driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
 pass00 = ""
 user01 = "Leonard.martinez"
 pass01 = ""

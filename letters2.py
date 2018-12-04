@@ -15,7 +15,8 @@ import datetime
 from holidays import WEEKEND, US
 import re
 
-
+global pass001
+pass001 = "*"
 booking_global1 = ""
 booking_global2 = ""
 booking_global3 = ""
@@ -1179,7 +1180,7 @@ def open_amp():
     wait.until(EC.presence_of_element_located((By.XPATH, access_server_XPATH)))
     access1 = driver.find_element_by_xpath(access_server_XPATH)
     user1.send_keys("Sbn13142750")
-    pass1.send_keys(pass00)
+    pass1.send_keys(pass001)
     access1.click()
     driver.get("https://courts.traviscountytx.gov/AMP/Cases/Search")
     xpath_startdate = "//*[@id=\"start\"]"

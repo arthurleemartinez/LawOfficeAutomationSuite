@@ -31,7 +31,7 @@ import datetime
 from holidays import WEEKEND, US
 import re
 global pass001
-pass001 = "Lm13142750*"
+pass001 = ""
 booking_global1 = ""
 booking_global2 = ""
 booking_global3 = ""
@@ -199,9 +199,9 @@ arrest_date_path = "/html/body/table[2]/tbody/tr/td[2]/table[1]/tbody/tr/td[2]/t
 booking_address_xpath = "//*[@id=\":f0\"]/div[1]/div[2]/div[2]/div/div[2]/div/p[17]/span[2]"
 defendant_notes_xpath = "//*[@id=\":f0\"]/div[1]/div[2]/div[2]/div/div[2]/div/p[28]/span[1]/text()"
 driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
-pass00 = "LM13142750"
+pass00 = ""
 user01 = "Leonard.martinez"
-pass01 = "51698"
+pass01 = ""
 user00 = "lawofficeofleonardmartinezdocu@gmail.com"
 case_elaw_save_close_path: str = "/html/body/form/div[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td/a[1]"
 

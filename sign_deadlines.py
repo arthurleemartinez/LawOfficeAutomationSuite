@@ -3,12 +3,15 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
+global driver
+driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
 global savepath_amp
 savepath_amp = "//*[@id=\"required-act-save-view\"]/div[2]/div[3]/ul/li[2]/input"
 global xpath_deadline_1, xpath_deadline_2, xpath_deadline_3, xpath_deadline_1_number
 global xpath_deadline_2_number, xpath_deadline_3_number, xpath_initial_contact_date, wait
 global xpath_deadline_4, xpath_deadline_5, xpath_deadline_4_number, xpath_deadline_5_number
 xpath_initial_contact_date = "//*[@id=\"required-act-grid\"]/table/tbody/tr[2]/td[2]/span[2]"
+wait = WebDriverWait(driver, 10)
 xpath_real_deadline = "//*[@id=\"required-act-grid\"]/table/tbody/tr[2]/td[2]/span[2]"
 xpath_real_edit = "//*[@id=\"required-act-grid\"]/table/tbody/tr[2]/td[6]/a/i"
 xpath_deadline_1 = "//*[@id=\"case-grid\"]/div[2]/table/tbody/tr[1]/td[5]/menu[2]"
@@ -27,27 +30,9 @@ contact_method_button_path = "//*[@id=\"required-act-save-view\"]/div[2]/form/di
 global user00, pass00
 user00 = "Sbn13142750"
 pass00 = ""
+user1_XPATH = "//*[@id=\"main_content\"]/div[2]/form/input[1]"
+pass1_XPATH = "//*[@id=\"main_content\"]/div[2]/form/input[2]"
 
-driver: WebDriver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
-wait = WebDriverWait(driver, 10)
-def open_amp_only():
-    driver: WebDriver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
-    driver.get("https://idc.traviscountytx.gov/nidp/idff/sso?id=35&sid=2&option=credential&sid=2&target=https%3A%2F%2Fcourts.traviscountytx.gov%2Famp%2F")
-    global user1_XPATH, pass1_XPATH, access_server_XPATH
-    user1_XPATH = "//*[@id=\"main_content\"]/div[2]/form/input[1]"
-    pass1_XPATH = "//*[@id=\"main_content\"]/div[2]/form/input[2]"
-    access_server_XPATH = "//*[@id=\"main_content\"]/div[2]/form/div/p/input"
-    # find the elements to click and interact with
-    wait.until(EC.presence_of_element_located((By.XPATH, user1_XPATH)))
-    user1 = driver.find_element_by_xpath(user1_XPATH)
-    wait.until(EC.presence_of_element_located((By.XPATH, pass1_XPATH)))
-    pass1 = driver.find_element_by_xpath(pass1_XPATH)
-    wait.until(EC.presence_of_element_located((By.XPATH, access_server_XPATH)))
-    access1 = driver.find_element_by_xpath(access_server_XPATH)
-    user1.send_keys()
-    pass1.send_keys(pass00)
-    access1.click()
-    driver.get("https://courts.traviscountytx.gov/AMP/Cases/Search")
 
 def check_number_of_alerts_deadline_boxes():
     global deadlines_count, deadline_1_btn, deadline_number_1, deadline_2_btn, deadline_3_btn, deadline_4_btn, deadline_5_btn
@@ -218,7 +203,27 @@ def conditional2():
     else:
         pass
 
-open_amp_only()
+def open_amp():
+    driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
+    driver.get('https://idc.traviscountytx.gov/nidp/idff/sso?id=35&sid=2&option=credential&sid=2&target=https%3A%2F%2Fcourts.traviscountytx.gov%2Famp%2F')
+    user1_XPATH = "//*[@id=\"main_content\"]/div[2]/form/input[1]"
+    pass1_XPATH = "//*[@id=\"main_content\"]/div[2]/form/input[2]"
+    access_server_XPATH = "//*[@id=\"main_content\"]/div[2]/form/div/p/input"
+    # find the elements to click and interact with
+    wait = WebDriverWait(driver, 10)
+    wait.until(EC.presence_of_element_located((By.XPATH, user1_XPATH)))
+    user1 = driver.find_element_by_xpath(user1_XPATH)
+    wait.until(EC.presence_of_element_located((By.XPATH, pass1_XPATH)))
+    pass1 = driver.find_element_by_xpath(pass1_XPATH)
+    wait.until(EC.presence_of_element_located((By.XPATH, access_server_XPATH)))
+    access1 = driver.find_element_by_xpath(access_server_XPATH)
+    user1.send_keys("Sbn13142750")
+    pass1.send_keys("")
+    access1.click()
+    driver.get("https://courts.traviscountytx.gov/AMP/Cases/Search")
+
+
+open_amp()
 check_number_of_alerts_deadline_boxes()
 conditional2()
 driver.close()

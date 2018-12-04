@@ -3,6 +3,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
+global driver
+driver: WebDriver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
 global savepath_amp
 savepath_amp = "//*[@id=\"required-act-save-view\"]/div[2]/div[3]/ul/li[2]/input"
 global xpath_deadline_1, xpath_deadline_2, xpath_deadline_3, xpath_deadline_1_number
@@ -28,8 +30,6 @@ contact_method_button_path = "//*[@id=\"required-act-save-view\"]/div[2]/form/di
 global user00, pass00
 user00 = "Sbn13142750"
 pass00 = ""
-global driver
-driver: WebDriver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
 def open_amp_only():
     driver: WebDriver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
     driver.get(

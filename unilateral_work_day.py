@@ -17,138 +17,19 @@ import re
 global pass001
 
 pass001 = ""
-booking_global1 = ""
-booking_global2 = ""
-booking_global3 = ""
-booking_global4 = ""
-booking_global5 = ""
-DOB_global1 = ""
-DOB_global2 = ""
-DOB_global3 = ""
-DOB_global4 = ""
-DOB_global5 = ""
-legalname_global1 = ""
-legalname_global2 = ""
-legalname_global3 = ""
-legalname_global4 = ""
-legalname_global5 = ""
-lnf_name_global1 = ""
-lnf_name_global2 = ""
-lnf_name_global3 = ""
-lnf_name_global4 = ""
-global_datenamez1 = ""
-global_datenamez2 = ""
-global_datenamez3 = ""
-global_datenamez4 = ""
-global_datenamez5 = ""
-global_homephone_1 = ""
-global_homephone_2 = ""
-global_homephone_3 = ""
-global_homephone_4 = ""
-global_homephone_5 = ""
-global_alternate_1 = ""
-global_alternate_2 = ""
-global_alternate_3 = ""
-global_alternate_4 = ""
-global_alternate_5 = ""
-global_email1 = ""
-global_email2 = ""
-global_email3 = ""
-global_email4 = ""
-global_email5 = ""
-firstline_address1 = ""
-firstline_address2 = ""
-firstline_address3 = ""
-firstline_address4 = ""
-firstline_address5 = ""
-globalcity_1 = ""
-globalcity_2 = ""
-globalcity_3 = ""
-globalcity_4 = ""
-globalcity_5 = ""
-globalstate_1 = ""
-globalstate_2 = ""
 pn1 = "Mr. "
 global_pronoun = pn1
 pn2 = "Ms. "
-global_pronoun_1 = ""
-global_pronoun_2 = ""
 path_print_def = "//*[@id=\"print-header\"]/div/button[2]"
-global_pronoun_3 = ""
-global_pronoun_4 = ""
 normal_pages_path = "//*[@id=\"page-settings\"]/div[2]/div/div[1]/label/input"
-global_pronoun_5 = ""
-first_case_number = ""
-second_case_number = ""
-third_case_number = ""
-fourth_case_number = ""
-fifth_case_number = ""
-first_case_court = ""
-second_case_court = ""
-third_case_court = ""
-fourth_case_court = ""
-fifth_case_court = ""
-first_case_date = ""
-second_case_date = ""
-third_case_date = ""
-fourth_case_date = ""
-fifth_case_date = ""
-booker = ""
-first_case_time = ""
-second_case_time = ""
-third_case_time = ""
-fourth_case_time = ""
-fifth_case_time = ""
-first_case_offense = ""
-second_case_offense = ""
-third_case_offense = ""
-fourth_case_offense = ""
-fifth_case_offense = ""
 orig_date = "Date:"
 orig_legalname = "v."
-global_lastName = ""
 orig_lnf = "Defendant:"
 custom_pages_path = "//*[@id=\"page-settings-custom-input\"]"
 orig_dob = "DOB:"
 orig_booking = "Booking No."
 orig_salutations = "Dear"
-globalstate_3 = ""
-globalstate_4 = ""
-globalstate_5 = ""
-globalzip_1 = ""
-globalzip_2 = ""
-globalzip_3 = ""
-globalzip_4 = ""
-globalzip_5 = ""
-global_booking_address1 = ""
-global_booking_address2 = ""
-global_booking_address3 = ""
-global_booking_address4 = ""
-global_booking_address5 = ""
-lnf_name_global5 = ""
-gender_global1 = ""
-gender_global2 = ""
-gender_global3 = ""
-gender_global4 = ""
-legal = ""
-birthday = ""
-lnf = ""
-salutations = ""
-lasto = ""
-booking44 = ""
-gender_global5 = ""
-jail_status_global1 = ""
-jail_status_global2 = ""
-jail_status_global3 = ""
-jail_status_global4 = ""
-jail_status_global5 = ""
-jail_status = ""
-last_name_global1 = ""
 def_DOB = "/html/body/table[2]/tbody/tr/td[2]/table[1]/tbody/tr/td[2]/table[4]/tbody/tr/td/table[1]/tbody/tr[4]/td/div/div[1]/div/div[2]/div/div[2]/div/p[23]/span[2]"
-last_name_global2 = ""
-last_name_global3 = ""
-last_name_global4 = ""
-last_name_global5 = ""
 sep = ','
 gmail_next_path = "//*[@id=\"passwordNext\"]"
 third_appointment_xpath = "//*[@id=\"case-grid\"]/div[2]/table/tbody/tr[3]/td[5]/menu[1]/a/i"
@@ -213,6 +94,7 @@ def next_business_day():
     HOLIDAYS_US = holidays.US()
     global asd
     reformatted = asd
+    global d1
     next_day = datetime.date.today() + ONE_DAY
     while next_day.weekday() in holidays.WEEKEND or next_day in HOLIDAYS_US:
         next_day += ONE_DAY
@@ -750,7 +632,7 @@ def appointment_iteration():
             wait.until(EC.presence_of_element_located(By.XPATH, first_case_time_path))
             global first_case_time
             first_case_time = driver.find_element_by_xpath(first_case_time_path).text
-            #### 2 OF 2
+
             wait.until(EC.presence_of_element_located(By.XPATH, second_case_number_path))
             global second_case_number
             second_case_number = driver.find_element_by_xpath(second_case_number_path).text
@@ -800,7 +682,6 @@ def appointment_iteration():
             wait.until(EC.presence_of_element_located(By.XPATH, first_case_time_path))
             global first_case_time
             first_case_time = driver.find_element_by_xpath(first_case_time_path).text
-            #### 2 OF 2
             wait.until(EC.presence_of_element_located(By.XPATH, second_case_number_path))
             global second_case_number
             second_case_number = driver.find_element_by_xpath(second_case_number_path).text
@@ -816,7 +697,6 @@ def appointment_iteration():
             wait.until(EC.presence_of_element_located(By.XPATH, second_case_time_path))
             global second_case_time
             second_case_time = driver.find_element_by_xpath(second_case_time_path).text
-            #### 3 OF 3
             wait.until(EC.presence_of_element_located(By.XPATH, third_case_number_path))
             global third_case_number
             third_case_number = driver.find_element_by_xpath(third_case_number_path).text
@@ -832,7 +712,6 @@ def appointment_iteration():
             wait.until(EC.presence_of_element_located(By.XPATH, third_case_time_path))
             global third_case_time
             third_case_time = driver.find_element_by_xpath(third_case_time_path).text
-            #### 4 OF 4
             wait.until(EC.presence_of_element_located(By.XPATH, fourth_case_number_path))
             global fourth_case_number
             fourth_case_number = driver.find_element_by_xpath(fourth_case_number_path).text
@@ -881,7 +760,6 @@ def appointment_iteration():
             wait.until(EC.presence_of_element_located(By.XPATH, second_case_time_path))
             global second_case_time
             second_case_time = driver.find_element_by_xpath(second_case_time_path).text
-            #### 3 OF 3
             wait.until(EC.presence_of_element_located(By.XPATH, third_case_number_path))
             global third_case_number
             third_case_number = driver.find_element_by_xpath(third_case_number_path).text
@@ -897,7 +775,6 @@ def appointment_iteration():
             wait.until(EC.presence_of_element_located(By.XPATH, third_case_time_path))
             global third_case_time
             third_case_time = driver.find_element_by_xpath(third_case_time_path).text
-            #### 4 OF 4
             wait.until(EC.presence_of_element_located(By.XPATH, fourth_case_number_path))
             global fourth_case_number
             fourth_case_number = driver.find_element_by_xpath(fourth_case_number_path).text
@@ -983,7 +860,7 @@ def appointment_iteration():
             global global_alternate_1, global_email1
             gender_global1 = driver.find_element_by_xpath(gender_global_path).text
             global_firstname1 = str(last_name1.split(sep, 1)[1])
-            ##ADD THESE GLOBAL VARIABLES AND INSTANCE VARIABLES TO REST OF THE ITERATION!!!!
+            # ADD THESE GLOBAL VARIABLES AND INSTANCE VARIABLES TO REST OF THE ITERATION!!!!
             wait.until(EC.presence_of_element_located(By.XPATH, booking_address_xpath))
             global global_booking_address1
             global_booking_address1 = driver.find_element_by_xpath(booking_address_xpath).text
@@ -1047,7 +924,7 @@ def appointment_iteration():
             global_homephone_2 = driver.find_element_by_xpath(booking_phone_path).text
             global_alternate_2 = driver.find_element_by_xpath(alternate_phone_xpath).text
             global_email2 = driver.find_element_by_xpath(gmail_apt_email_path).text
-            get_case_details()  ########################################################################
+            get_case_details()
         elif check_exists_by_xpath(third_appointment_xpath) == True:
             wait.until(EC.presence_of_element_located(By.XPATH, third_appointment_xpath))
             appointment = driver.find_element_by_xpath(third_appointment_xpath)
@@ -1080,7 +957,7 @@ def appointment_iteration():
             legalname_global3 = str(last_name1.split(sep, 1)[1]) + str(last_name1.split(sep, 1)[0])  # FINAL LEGAL NAME
             gender_global3 = driver.find_element_by_xpath(gender_global_path).text
             global_firstname3 = str(last_name1.split(sep, 1)[1])
-            ################################################
+            #
             wait.until(EC.presence_of_element_located(By.XPATH, booking_address_xpath))
             global_booking_address3 = driver.find_element_by_xpath(booking_address_xpath).text
             globalzip_3 = global_booking_address3.split(",")[3].strip()
@@ -1096,7 +973,7 @@ def appointment_iteration():
             global_homephone_3 = driver.find_element_by_xpath(booking_phone_path).text
             global_alternate_3 = driver.find_element_by_xpath(alternate_phone_xpath).text
             global_email3 = driver.find_element_by_xpath(gmail_apt_email_path).text
-            get_case_details()  ########################################################################
+            get_case_details()
         elif check_exists_by_xpath(fourth_appointment_xpath) == True:
             wait.until(EC.presence_of_element_located(By.XPATH, fourth_appointment_xpath))
             appointment = driver.find_element_by_xpath(fourth_appointment_xpath)
@@ -1389,7 +1266,7 @@ def create_elaw_appointments():
     def insert_alternate_phone5():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_alternate_phone_path))
         elaw_alternate_phone = driver.find_element_by_xpath(elaw_alternate_phone_path)
-        elaw_alternate_phone.send_keys(global_alternate_5)  ########### FIVE OF TWELVE
+        elaw_alternate_phone.send_keys(global_alternate_5)  # FIVE OF TWELVE
 
     def insert_home_phone1():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_home_phone_path))

@@ -30,7 +30,8 @@ from selenium import webdriver
 import datetime
 from holidays import WEEKEND, US
 import re
-
+global pass001
+pass001 = "Lm13142750*"
 booking_global1 = ""
 booking_global2 = ""
 booking_global3 = ""
@@ -198,9 +199,9 @@ arrest_date_path = "/html/body/table[2]/tbody/tr/td[2]/table[1]/tbody/tr/td[2]/t
 booking_address_xpath = "//*[@id=\":f0\"]/div[1]/div[2]/div[2]/div/div[2]/div/p[17]/span[2]"
 defendant_notes_xpath = "//*[@id=\":f0\"]/div[1]/div[2]/div[2]/div/div[2]/div/p[28]/span[1]/text()"
 driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
-pass00 = ""
+pass00 = "LM13142750"
 user01 = "Leonard.martinez"
-pass01 = ""
+pass01 = "51698"
 user00 = "lawofficeofleonardmartinezdocu@gmail.com"
 case_elaw_save_close_path: str = "/html/body/form/div[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td/a[1]"
 
@@ -566,7 +567,7 @@ def replace_doc_values_and_print():
     wait.until(EC.presence_of_element_located(By.XPATH, path_print_def))
     print_def = driver.find_element_by_xpath(path_print_def)
     print_def.click()
-    time.sleep(2.5)
+    time.sleep(5)
     keyboard.press_and_release("ctrl+p")
     wait.until(EC.presence_of_element_located(By.XPATH, custom_pages_path))
     custom_pages = driver.find_element_by_xpath(custom_pages_path)
@@ -574,7 +575,7 @@ def replace_doc_values_and_print():
     custom_pages.send_keys("1")
     wait.until(EC.presence_of_element_located(By.XPATH, path_print_def))
     print_def.click()
-    time.sleep(2.5)
+    time.sleep(5)
     # RESET VALUES TO DEFAULT
     # date44 REPLACE REPLACE REPLACE
     wait.until(EC.presence_of_element_located(By.XPATH, path_replace_what))
@@ -1219,7 +1220,7 @@ def open_amp():
     wait.until(EC.presence_of_element_located((By.XPATH, access_server_XPATH)))
     access1 = driver.find_element_by_xpath(access_server_XPATH)
     user1.send_keys("Sbn13142750")
-    pass1.send_keys(pass00)
+    pass1.send_keys(pass001)
     access1.click()
     driver.get("https://courts.traviscountytx.gov/AMP/Cases/Search")
     xpath_startdate = "//*[@id=\"start\"]"

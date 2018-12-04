@@ -1,8 +1,29 @@
-from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.common.exceptions import NoSuchElementException
+import time
+import urllib3
+import selenium
+import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import requests
+from selenium.webdriver.common.keys import Keys
+import webbrowser
+import keyboard
 from selenium import webdriver
+from bs4 import BeautifulSoup
+from _datetime import datetime
+import datetime
+import holidays
+from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as ec
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
+import keyboard
+from selenium import webdriver
+import datetime
 global savepath_amp
 savepath_amp = "//*[@id=\"required-act-save-view\"]/div[2]/div[3]/ul/li[2]/input"
 global xpath_deadline_1, xpath_deadline_2, xpath_deadline_3, xpath_deadline_1_number
@@ -27,9 +48,8 @@ letter_btn_path = "//*[@id=\"contact-method_listbox\"]/li[1]"
 contact_method_button_path = "//*[@id=\"required-act-save-view\"]/div[2]/form/div[1]/div[2]/span/span/span[1]"
 global user00, pass00
 user00 = "Sbn13142750"
-pass00 = ""
-global driver
-driver: WebDriver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
+pass00 = "Lm13142750*"
+
 def open_amp_only():
     driver: WebDriver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
     driver.get(
@@ -206,15 +226,15 @@ def iterate_boxes_five():
     save_amp1.click()       
 
 def conditional2():
-    if deadlines_count == 1:
+    if deadlines_count = 1:
         iterate_boxes_once()
-    elif deadlines_count == 2:
+    elif deadlines_count = 2:
         iterate_boxes_two()
-    elif deadlines_count == 3:
+    elif deadlines_count = 3:
         iterate_boxes_three()    
-    elif deadlines_count == 4:
+    elif deadlines_count = 4:
         iterate_boxes_four()
-    elif deadlines_count == 5:
+    elif deadlines_count = 5:
         iterate_boxes_five()
     else:
         pass    
@@ -222,4 +242,4 @@ def conditional2():
 open_amp_only()
 check_number_of_alerts_deadline_boxes()
 conditional2()
-driver.close()
+drive.close()

@@ -31,7 +31,7 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 from _datetime import datetime
 import datetime
-import holidays
+from holidays import WEEKEND, US
 import re
 
 user1_XPATH = "/html/body/form/table/tbody/tr[2]/td[1]/div/div/table/tbody/tr[1]/td[3]/input"
@@ -112,19 +112,19 @@ arrest_date_path = "/html/body/table[2]/tbody/tr/td[2]/table[1]/tbody/tr/td[2]/t
 booking_address_xpath = "//*[@id=\":f0\"]/div[1]/div[2]/div[2]/div/div[2]/div/p[17]/span[2]"
 defendant_notes_xpath = "//*[@id=\":f0\"]/div[1]/div[2]/div[2]/div/div[2]/div/p[28]/span[1]/text()"
 driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
-pass00 = "LM13142750"
+pass00 = ""
 user01 = "Leonard.martinez"
-pass01 = "51698"
+pass01 = ""
 user00 = "lawofficeofleonardmartinezdocu@gmail.com"
 case_elaw_save_close_path = "/html/body/form/div[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td/a[1]"
 
 
 def business_day():
     ONE_DAY = datetime.timedelta(days=0)
-    HOLIDAYS_US = holidays.US()
+    HOLIDAYS_US = US()
     # next day = today because renaming variables is hard
     next_day = datetime.date.today() + ONE_DAY
-    while next_day.weekday() in holidays.WEEKEND or next_day in HOLIDAYS_US:
+    while next_day.weekday() in WEEKEND or next_day in HOLIDAYS_US:
         next_day += ONE_DAY
         day = str(next_day.day)
         d1 = " "

@@ -2,8 +2,24 @@
 
 from selenium.common.exceptions import NoSuchElementException
 import time
+
+import urllib3
+import selenium
+import time
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+import requests
+from selenium.webdriver.common.keys import Keys
+import webbrowser
+import keyboard
+from selenium import webdriver
+from bs4 import BeautifulSoup
 from _datetime import datetime
+import datetime
 import holidays
+from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
@@ -15,12 +31,13 @@ import datetime
 from holidays import WEEKEND, US
 import re
 global pass001
-global driver
-driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
 pass001 = ""
+
+
 pn1 = "Mr. "
 global_pronoun = pn1
 pn2 = "Ms. "
+
 path_print_def = "//*[@id=\"print-header\"]/div/button[2]"
 normal_pages_path = "//*[@id=\"page-settings\"]/div[2]/div/div[1]/label/input"
 orig_date = "Date:"
@@ -41,12 +58,11 @@ gender_global_path = "//*[@id=\":eq\"]/div[1]/div[2]/div[2]/div/div[2]/div/p[24]
 sheriff_booking_path = "//*[@id=\"InmateCharges\"]/text()[1]"
 documents_xpath = "//*[@id=\"appt_actions\"]/ul/li[1]/a"
 open_docs_url = "https://docs.google.com/document/d/15Qk0UM2f9G7glB0BOL-hPeN86o_YN9YjfRvj53riBMQ/edit?usp=sharing"
-sign_in_docs_path: str = "//*[@id=\"gb\"]/div/div/a"
+sign_in_docs_path = "//*[@id=\"gb\"]/div/div/a"
 docs_email_path = "//*[@id=\"identifierId\"]"
 docs_pass_path = "//*[@id=\"password\"]/div[1]/div/div[1]/input"
 docs_next_path = "//*[@id=\"passwordNext\"]"
 more_options_path = "//*[@id=\"docs-findbar-button-more-options\"]"
-firstname = ""
 user1_XPATH = "/html/body/form/table/tbody/tr[2]/td[1]/div/div/table/tbody/tr[1]/td[3]/input"
 pass1_XPATH = "/html/body/form/table/tbody/tr[2]/td[1]/div/div/table/tbody/tr[2]/td[3]/input"
 access_server_XPATH = "/html/body/form/table/tbody/tr[2]/td[1]/div/div/table/tbody/tr[3]/td[1]/div/input"
@@ -65,21 +81,13 @@ alternate_phone_xpath = "/html/body/table[2]/tbody/tr/td[2]/table[1]/tbody/tr/td
 arrest_date_path = "/html/body/table[2]/tbody/tr/td[2]/table[1]/tbody/tr/td[2]/table[4]/tbody/tr/td/table[1]/tbody/tr[4]/td/div/div[1]/div/div[2]/div/div[2]/div/p[18]/span[2]"
 booking_address_xpath = "//*[@id=\":f0\"]/div[1]/div[2]/div[2]/div/div[2]/div/p[17]/span[2]"
 defendant_notes_xpath = "//*[@id=\":f0\"]/div[1]/div[2]/div[2]/div/div[2]/div/p[28]/span[1]/text()"
+driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
 pass00 = ""
 user01 = "Leonard.martinez"
 pass01 = ""
 user00 = "lawofficeofleonardmartinezdocu@gmail.com"
 case_elaw_save_close_path: str = "/html/body/form/div[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td/a[1]"
-elaw_1_url = "https://www5.elawsoftware.com/"
-global global_one_exists, global_2_exists, global_3_exists, pe, global_4_exists, global_5_exists
-global_one_exists = 0
-global_2_exists = 0
-pe = " (A)"
-global_3_exists = 0
-global_4_exists = 0
-global_5_exists = 0
-global no_hyphens_dob_global4, no_hyphens_dob_global4, no_hyphens_dob_global3, no_hyphens_dob_global2
-no_hyphens_dob_global4 = re.sub('-', '', DOB_global4)
+
 global wait
 wait = WebDriverWait(driver, 10)
 global am9
@@ -88,22 +96,27 @@ global am830
 am830 = "8:30 AM"
 
 
+
 def next_business_day():
-    global reformatted
     ONE_DAY = datetime.timedelta(days=1)
     HOLIDAYS_US = holidays.US()
-    global asd
-    reformatted = asd
-    global d1
+    global next_day
     next_day = datetime.date.today() + ONE_DAY
     while next_day.weekday() in holidays.WEEKEND or next_day in HOLIDAYS_US:
         next_day += ONE_DAY
-        day = str(next_day.day)
-        d1 = "/"
-        month = str(next_day.month)
-        yr = str(next_day.year)
-        asd = month + d1 + day + d1 + yr
-    return reformatted
+    return next_day
+
+
+
+def converto():
+    day = str(next_day.day)
+    d1 = "/"
+    month = str(next_day.month)
+    yr = str(next_day.year)
+    asd = month + d1 + day + d1 + yr
+    return asd
+
+
 
 
 def sign_elaw_open_new_client():
@@ -132,56 +145,63 @@ def sign_elaw_open_old_client():
     open_create_case = driver.find_element_by_xpath(path_open_create_case)
     open_create_case.click()
 
+def this_business_day():
+    ONE_DAY = datetime.timedelta(days=0)
+    HOLIDAYS_US = holidays.US()
+    global next_day0
+    next_day0 = datetime.date.today() + ONE_DAY
+    while next_day0.weekday() in holidays.WEEKEND or next_day0 in HOLIDAYS_US:
+        next_day0 += ONE_DAY
+    return next_day0
+
+def converto1():
+    global day0, month0, yr0
+    day = str(next_day0.day)
+    d1 = "/"
+    month = str(next_day0.month)
+    yr = str(next_day0.year)
+    asd = month + d1 + day + d1 + yr
+    return asd
+
 
 def business_day():
-    one_day = datetime.timedelta(days=0)
-    holidays_us = US()
-    # next day = today because renaming variables is hard
-    next_day = datetime.date.today() + one_day
-    global month1
-    month1 = ""
-    while next_day.weekday() in WEEKEND or next_day in holidays_us:
-        next_day += one_day
-        day = str(next_day.day)
-        global d1
-        d1 = " "
-        global c1
-        global c1
-        c1: str = ","
-        month = str(next_day.month)
-        yr = str(next_day.year)
-        if month == "1" or "01":
-            month1 = "January"
-        elif month == "2" or "02":
-            month1 = "February"
-        elif month == "3" or "03":
-            month1 = "March"
-        elif month == "4" or "04":
-            month1 = "April"
-        elif month == "5" or "05":
-            month1 = "May"
-        elif month == "6" or "06":
-            month1 = "June"
-        elif month == "7" or "07":
-            month1 = "July"
-        elif month == "8" or "08":
-            month1 = "August"
-        elif month == "9" or "09":
-            month1 = "September"
-        elif month == "10" or "10":
-            month1 = "October"
-        elif month == "11" or "11":
-            month1 = "November"
-        else:
-            month1 = "December"
-    reformatted1: str = month1 + d1 + day + c1 + d1 + yr
-    return reformatted1
+    month1 = "January"
+    month - month0
+    c1 = ","
+    day = day0
+    yr = yr0
+    d1 = " " 
+    if month == "1" or "01":
+        month1 = "January"
+    elif month == "2" or "02":
+        month1 = "February"
+    elif month == "3" or "03":
+        month1 = "March"
+    elif month == "4" or "04":
+        month1 = "April"
+    elif month == "5" or "05":
+        month1 = "May"
+    elif month == "6" or "06":
+        month1 = "June"
+    elif month == "7" or "07":
+        month1 = "July"
+    elif month == "8" or "08":
+        month1 = "August"
+    elif month == "9" or "09":
+        month1 = "September"
+    elif month == "10" or "10":
+        month1 = "October"
+    elif month == "11" or "11":
+        month1 = "November"
+    else:
+        month1 = "December"
+    reformatted: str = month1 + d1 + day + c1 + d1 + yr
+    return reformatted
 
 
-global entered_date
 entered_date = business_day()
+wait = WebDriverWait(driver, 10)
 
-global booking_global
 booking_global = ""
 
 
@@ -218,18 +238,18 @@ def open_docs():
 
 def getpronoun():
     if gender_global1 == "Female":
-        global_pronoun1 = pn2
+        global_pronoun = pn2
     elif gender_global2 == "Female":
-        global_pronoun1 = pn2
+        global_pronoun = pn2
     elif gender_global3 == "Female":
-        global_pronoun1 = pn2
+        global_pronoun = pn2
     elif gender_global4 == "Female":
-        global_pronoun1 = pn2
+        global_pronoun = pn2
     elif gender_global5 == "Female":
-        global_pronoun1 = pn2
+        global_pronoun = pn2
     else:
-        global_pronoun1 = pn1
-    return global_pronoun1
+        global_pronoun = pn1
+    return global_pronoun
 
 
 def replace_doc_values_and_print():
@@ -240,7 +260,6 @@ def replace_doc_values_and_print():
     open_docs()
 
     def get_legal():
-        global legal
         if booking_global1 == booker:
             legal = legalname_global1
         elif booking_global2 == booker:
@@ -257,7 +276,6 @@ def replace_doc_values_and_print():
     legal = get_legal()
 
     def get_birthday():
-        global birthday
         if booking_global1 == booker:
             birthday = DOB_global1
         elif booking_global2 == booker:
@@ -273,7 +291,6 @@ def replace_doc_values_and_print():
     birthday = get_birthday()
 
     def get_lnf():
-        global lnf
         if booking_global1 == booker:
             lnf = lnf_name_global1
         elif booking_global2 == booker:
@@ -290,7 +307,6 @@ def replace_doc_values_and_print():
     lnf = get_lnf()
 
     def get_lasto():
-        global lasto
         if booking_global1 == booker:
             lasto = last_name_global1
         elif booking_global2 == booker:
@@ -307,7 +323,6 @@ def replace_doc_values_and_print():
     lasto = get_lasto()
 
     def get_firstname():
-        global firstname
         if booking_global1 == booker:
             firstname = global_firstname1
         elif booking_global2 == booker:
@@ -374,7 +389,7 @@ def replace_doc_values_and_print():
         return jail_status
 
     getJailStatus()
-    global date44, legalname44,lnf44, salutations44, booking44
+
     # 44 suffix means final replacement values per defendant
     date44 = orig_date + " " + entered_date
     legalname44 = orig_legalname + " " + legal
@@ -525,6 +540,15 @@ def replace_doc_values_and_print():
     driver.find_element_by_xpath(path_closer1).click()
 
 
+elaw_1_url = "https://www5.elawsoftware.com/"
+global_one_exists = 0
+global_2_exists = 0
+pe = " (A)"
+global_3_exists = 0
+global_4_exists = 0
+global_5_exists = 0
+global no_hyphens_dob_global4, no_hyphens_dob_global4, no_hyphens_dob_global3, no_hyphens_dob_global2
+no_hyphens_dob_global4 = re.sub('-', '', DOB_global4)
 
 third_case_court_path = "/html/body/table[2]/tbody/tr/td[2]/table[1]/tbody/tr/td[2]/table[4]/tbody/tr/td/table[1]/tbody/tr[4]/td/div/div[1]/div/div[2]/div/div[2]/div/table[3]/tbody/tr/td[4]/p/span"
 
@@ -632,7 +656,7 @@ def appointment_iteration():
             wait.until(EC.presence_of_element_located(By.XPATH, first_case_time_path))
             global first_case_time
             first_case_time = driver.find_element_by_xpath(first_case_time_path).text
-
+            #### 2 OF 2
             wait.until(EC.presence_of_element_located(By.XPATH, second_case_number_path))
             global second_case_number
             second_case_number = driver.find_element_by_xpath(second_case_number_path).text
@@ -649,7 +673,7 @@ def appointment_iteration():
             wait.until(EC.presence_of_element_located(By.XPATH, second_case_time_path))
             global second_case_time
             second_case_time = driver.find_element_by_xpath(second_case_time_path).text
-            # 3 OF 3
+            #### 3 OF 3
             wait.until(EC.presence_of_element_located(By.XPATH, third_case_number_path))
             global third_case_number
             third_case_number = driver.find_element_by_xpath(third_case_number_path).text
@@ -682,6 +706,7 @@ def appointment_iteration():
             wait.until(EC.presence_of_element_located(By.XPATH, first_case_time_path))
             global first_case_time
             first_case_time = driver.find_element_by_xpath(first_case_time_path).text
+            #### 2 OF 2
             wait.until(EC.presence_of_element_located(By.XPATH, second_case_number_path))
             global second_case_number
             second_case_number = driver.find_element_by_xpath(second_case_number_path).text
@@ -697,6 +722,7 @@ def appointment_iteration():
             wait.until(EC.presence_of_element_located(By.XPATH, second_case_time_path))
             global second_case_time
             second_case_time = driver.find_element_by_xpath(second_case_time_path).text
+            #### 3 OF 3
             wait.until(EC.presence_of_element_located(By.XPATH, third_case_number_path))
             global third_case_number
             third_case_number = driver.find_element_by_xpath(third_case_number_path).text
@@ -712,6 +738,7 @@ def appointment_iteration():
             wait.until(EC.presence_of_element_located(By.XPATH, third_case_time_path))
             global third_case_time
             third_case_time = driver.find_element_by_xpath(third_case_time_path).text
+            #### 4 OF 4
             wait.until(EC.presence_of_element_located(By.XPATH, fourth_case_number_path))
             global fourth_case_number
             fourth_case_number = driver.find_element_by_xpath(fourth_case_number_path).text
@@ -744,7 +771,7 @@ def appointment_iteration():
             wait.until(EC.presence_of_element_located(By.XPATH, first_case_time_path))
             global first_case_time
             first_case_time = driver.find_element_by_xpath(first_case_time_path).text
-            # 2 OF 2
+            #### 2 OF 2
             wait.until(EC.presence_of_element_located(By.XPATH, second_case_number_path))
             global second_case_number
             second_case_number = driver.find_element_by_xpath(second_case_number_path).text
@@ -760,6 +787,7 @@ def appointment_iteration():
             wait.until(EC.presence_of_element_located(By.XPATH, second_case_time_path))
             global second_case_time
             second_case_time = driver.find_element_by_xpath(second_case_time_path).text
+            #### 3 OF 3
             wait.until(EC.presence_of_element_located(By.XPATH, third_case_number_path))
             global third_case_number
             third_case_number = driver.find_element_by_xpath(third_case_number_path).text
@@ -775,6 +803,7 @@ def appointment_iteration():
             wait.until(EC.presence_of_element_located(By.XPATH, third_case_time_path))
             global third_case_time
             third_case_time = driver.find_element_by_xpath(third_case_time_path).text
+            #### 4 OF 4
             wait.until(EC.presence_of_element_located(By.XPATH, fourth_case_number_path))
             global fourth_case_number
             fourth_case_number = driver.find_element_by_xpath(fourth_case_number_path).text
@@ -790,7 +819,7 @@ def appointment_iteration():
             wait.until(EC.presence_of_element_located(By.XPATH, fourth_case_time_path))
             global fourth_case_time
             fourth_case_time = driver.find_element_by_xpath(fourth_case_time_path).text
-            # 5 OF 5
+            #### 5 OF 5
             wait.until(EC.presence_of_element_located(By.XPATH, fifth_case_number_path))
             global fifth_case_number
             fifth_case_number = driver.find_element_by_xpath(fifth_case_number_path).text
@@ -860,7 +889,7 @@ def appointment_iteration():
             global global_alternate_1, global_email1
             gender_global1 = driver.find_element_by_xpath(gender_global_path).text
             global_firstname1 = str(last_name1.split(sep, 1)[1])
-            # ADD THESE GLOBAL VARIABLES AND INSTANCE VARIABLES TO REST OF THE ITERATION!!!!
+            ##ADD THESE GLOBAL VARIABLES AND INSTANCE VARIABLES TO REST OF THE ITERATION!!!!
             wait.until(EC.presence_of_element_located(By.XPATH, booking_address_xpath))
             global global_booking_address1
             global_booking_address1 = driver.find_element_by_xpath(booking_address_xpath).text
@@ -924,7 +953,7 @@ def appointment_iteration():
             global_homephone_2 = driver.find_element_by_xpath(booking_phone_path).text
             global_alternate_2 = driver.find_element_by_xpath(alternate_phone_xpath).text
             global_email2 = driver.find_element_by_xpath(gmail_apt_email_path).text
-            get_case_details()
+            get_case_details()  ########################################################################
         elif check_exists_by_xpath(third_appointment_xpath) == True:
             wait.until(EC.presence_of_element_located(By.XPATH, third_appointment_xpath))
             appointment = driver.find_element_by_xpath(third_appointment_xpath)
@@ -957,7 +986,7 @@ def appointment_iteration():
             legalname_global3 = str(last_name1.split(sep, 1)[1]) + str(last_name1.split(sep, 1)[0])  # FINAL LEGAL NAME
             gender_global3 = driver.find_element_by_xpath(gender_global_path).text
             global_firstname3 = str(last_name1.split(sep, 1)[1])
-            #
+            ################################################
             wait.until(EC.presence_of_element_located(By.XPATH, booking_address_xpath))
             global_booking_address3 = driver.find_element_by_xpath(booking_address_xpath).text
             globalzip_3 = global_booking_address3.split(",")[3].strip()
@@ -973,7 +1002,7 @@ def appointment_iteration():
             global_homephone_3 = driver.find_element_by_xpath(booking_phone_path).text
             global_alternate_3 = driver.find_element_by_xpath(alternate_phone_xpath).text
             global_email3 = driver.find_element_by_xpath(gmail_apt_email_path).text
-            get_case_details()
+            get_case_details()  ########################################################################
         elif check_exists_by_xpath(fourth_appointment_xpath) == True:
             wait.until(EC.presence_of_element_located(By.XPATH, fourth_appointment_xpath))
             appointment = driver.find_element_by_xpath(fourth_appointment_xpath)
@@ -1076,10 +1105,12 @@ def appointment_iteration():
     replace_doc_values_and_print()
 
 
-# Open_amp -> appointment_iteration ->find defendant info -> open gmail -> booker -> open drive -> replace_dochub_values() -> print dochub letters()
+# Open_amp -> appointment_iteration ->find defendent info -> open gmail -> booker -> open drive -> replace_dochub_values() -> print dochub letters()
 
 def open_amp():
-    driver.get("window.open('https://idc.traviscountytx.gov/nidp/idff/sso?id=35&sid=2&option=credential&sid=2&target=https%3A%2F%2Fcourts.traviscountytx.gov%2Famp%2F');")
+    driver: WebDriver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
+    driver.get(
+        "window.open('https://idc.traviscountytx.gov/nidp/idff/sso?id=35&sid=2&option=credential&sid=2&target=https%3A%2F%2Fcourts.traviscountytx.gov%2Famp%2F');")
     global user1_XPATH, pass1_XPATH, access_server_XPATH
     user1_XPATH = "//*[@id=\"main_content\"]/div[2]/form/input[1]"
     pass1_XPATH = "//*[@id=\"main_content\"]/div[2]/form/input[2]"
@@ -1190,7 +1221,7 @@ def create_elaw_appointments():
         elaw_bookingno = driver.find_element_by_xpath(elaw_bookingno_path)
         elaw_bookingno.send_keys(booking_global5)
 
-    # two out of twelve
+    ########## two out of twelve
     def insert_dob1():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_dob_path))
         elaw_dob = driver.find_element_by_xpath(elaw_dob_path)
@@ -1216,7 +1247,7 @@ def create_elaw_appointments():
         elaw_dob = driver.find_element_by_xpath(elaw_dob_path)
         elaw_dob.send_keys(DOB_global5)
 
-    # THREE OF TWELVE
+    ######### THREE OF TWELVE
     def insert_email1():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_email_path))
         elaw_email = driver.find_element_by_xpath(elaw_email_path)
@@ -1242,7 +1273,7 @@ def create_elaw_appointments():
         elaw_email = driver.find_element_by_xpath(elaw_email_path)
         elaw_email.send_keys(global_email5)
 
-    # FOUR OF TWELVE
+    ####FOUR OF TWELVE
     def insert_alternate_phone1():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_alternate_phone_path))
         elaw_alternate_phone = driver.find_element_by_xpath(elaw_alternate_phone_path)
@@ -1266,7 +1297,7 @@ def create_elaw_appointments():
     def insert_alternate_phone5():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_alternate_phone_path))
         elaw_alternate_phone = driver.find_element_by_xpath(elaw_alternate_phone_path)
-        elaw_alternate_phone.send_keys(global_alternate_5)  # FIVE OF TWELVE
+        elaw_alternate_phone.send_keys(global_alternate_5)  ########### FIVE OF TWELVE
 
     def insert_home_phone1():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_home_phone_path))
@@ -1293,7 +1324,7 @@ def create_elaw_appointments():
         elaw_home_phone = driver.find_element_by_xpath(elaw_home_phone_path)
         elaw_home_phone.send_keys(global_homephone_5)
 
-    # SIX OF TWELVE
+    ########## SIX OF TWELVE
     def insert_datenamez1():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_first_name_path))
         elaw_first_name_box = driver.find_element_by_xpath(elaw_first_name_path)
@@ -1318,7 +1349,7 @@ def create_elaw_appointments():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_first_name_path))
         elaw_first_name_box = driver.find_element_by_xpath(elaw_first_name_path)
         elaw_first_name_box.send_keys(global_datenamez5)
-        # SEVEN OF TWELVE
+        ############### SEVEN OF TWELVE
 
     def insert_salutationssex():
         if global_pronoun == pn2:
@@ -1391,7 +1422,7 @@ def create_elaw_appointments():
     def insert_state5():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_state_path))
         elaw_state1 = driver.find_element_by_xpath(elaw_state_path)
-        elaw_state1.send_keys(globalstate_5)
+        elaw_state1.send_keys(globalstate_5)  ############# TEN OF TWELVE
 
     def insert_city1():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_city_path))
@@ -1416,7 +1447,7 @@ def create_elaw_appointments():
     def insert_city5():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_city_path))
         city1 = driver.find_element_by_xpath(elaw_city_path)
-        city1.send_keys(globalcity_5)
+        city1.send_keys(globalcity_5)  ############# ELEVEN OF TWELVE
 
     def insert_first_address1():
         wait.until(EC.presence_of_element_located(By.XPATH, elaw_first_address_path))
@@ -1644,11 +1675,11 @@ def create_elaw_appointments():
         # about 15 individual boxes (instance objects)
         insert_booking_number1()
         insert_datenamez1()
-        insert_dob1()
-        insert_email1()
-        insert_alternate_phone1()
-        insert_home_phone1()
-        insert_last_name1()
+        insert_dob1()  ##//
+        insert_email1()  ##//
+        insert_alternate_phone1()  ##//
+        insert_home_phone1()  ##//
+        insert_last_name1()  ##//
         insert_zip1()
         insert_state1()
         insert_city1()
@@ -1658,78 +1689,78 @@ def create_elaw_appointments():
 
     # for the second in list of up to 5
     def wait_and_replace_elements2():  # function for second defendant only
-        insert_jail_status()
-        insert_appt_status()
+        insert_jail_status()  # //
+        insert_appt_status()  # //
         insert_salutationssex()
         # about 15 individual boxes (instance objects)
-        insert_booking_number2()
-        insert_datenamez2()
-        insert_dob2()
-        insert_email2()
-        insert_alternate_phone2()
-        insert_home_phone2()
-        insert_last_name2()
-        insert_zip2()
-        insert_state2()
-        insert_city2()
-        insert_first_address2()
+        insert_booking_number2()  ##//
+        insert_datenamez2()  ##//
+        insert_dob2()  ##//
+        insert_email2()  ##//
+        insert_alternate_phone2()  ##//
+        insert_home_phone2()  ##//
+        insert_last_name2()  ##//
+        insert_zip2()  ##//
+        insert_state2()  ##//
+        insert_city2()  ##//
+        insert_first_address2()  # //
         save_elaw()
         create_elaw_case_by_case2()
 
     def wait_and_replace_elements3():  # function for second defendant only
-        insert_jail_status()
-        insert_appt_status()
+        insert_jail_status()  # //
+        insert_appt_status()  # //
         insert_salutationssex()
         # about 15 individual boxes (instance objects)
-        insert_booking_number3()
-        insert_datenamez3()
-        insert_dob3()
-        insert_email3()
-        insert_alternate_phone3()
-        insert_home_phone3()
-        insert_last_name3()
-        insert_zip3()
-        insert_state3()
-        insert_city3()
-        insert_first_address3()
+        insert_booking_number3()  ##//
+        insert_datenamez3()  ##//
+        insert_dob3()  ##//
+        insert_email3()  ##//
+        insert_alternate_phone3()  ##//
+        insert_home_phone3()  ##//
+        insert_last_name3()  ##//
+        insert_zip3()  ##//
+        insert_state3()  ##//
+        insert_city3()  ##//
+        insert_first_address3()  # //
         save_elaw()
         create_elaw_case_by_case3()
 
     def wait_and_replace_elements4():  # function for second defendent only
-        insert_jail_status()
-        insert_appt_status()
+        insert_jail_status()  # //
+        insert_appt_status()  # //
         insert_salutationssex()
         # about 15 individual boxes (instance objects)
-        insert_booking_number4()
-        insert_datenamez4()
-        insert_dob4()
-        insert_email4()
-        insert_alternate_phone4()
-        insert_home_phone4()
-        insert_last_name4()
-        insert_zip4()
-        insert_state4()
-        insert_city4()
-        insert_first_address4()
+        insert_booking_number4()  ##//
+        insert_datenamez4()  ##//
+        insert_dob4()  ##//
+        insert_email4()  ##//
+        insert_alternate_phone4()  ##//
+        insert_home_phone4()  ##//
+        insert_last_name4()  ##//
+        insert_zip4()  ##//
+        insert_state4()  ##//
+        insert_city4()  ##//
+        insert_first_address4()  # //
         save_elaw()
         create_elaw_case_by_case4()
 
     def wait_and_replace_elements5():
-        insert_jail_status()
-        insert_appt_status()
+        insert_jail_status()  # //
+        insert_appt_status()  # //
         insert_salutationssex()
         # about 15 individual boxes (instance objects)
-        insert_booking_number5()
-        insert_datenamez5()
-        insert_dob5()
-        insert_email5()
-        insert_alternate_phone5()
-        insert_home_phone5()
-        insert_last_name5()
-        insert_zip5()
-        insert_state5()
-        insert_city5()
-        insert_first_address5()
+        insert_booking_number5()  ##//
+        insert_datenamez5()  ##//
+        insert_dob5()  ##//
+        insert_email5()  ##//
+        insert_alternate_phone5()  ##//
+        insert_home_phone5()  ##//
+        insert_last_name5()  ##//
+        insert_zip5()  ##//
+        insert_state5()  ##//
+        insert_city5()  ##//
+        insert_first_address5()  # //
         save_elaw()
         create_elaw_case_by_case5()
 
@@ -1800,8 +1831,36 @@ def create_elaw_appointments():
 
 
 def double_docket_pull_call():
-    driver.get('https://www5.elawsoftware.com/eLawSecure.nsf/SecureLogin?ReadForm')  # put here the address of your page
-    # find the elements to click and interact with
+
+
+    def next_business_day():
+        ONE_DAY = datetime.timedelta(days=1)
+        HOLIDAYS_US = holidays.US()
+        global next_day
+        next_day = datetime.date.today() + ONE_DAY
+        while next_day.weekday() in holidays.WEEKEND or next_day in HOLIDAYS_US:
+            next_day += ONE_DAY
+        return next_day
+
+
+    def converto():
+        day = str(next_day.day)
+        d1 = "/"
+        month = str(next_day.month)
+        yr = str(next_day.year)
+        asd = month + d1 + day + d1 + yr
+        return asd
+
+
+    driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
+    driver.get('https://www5.elawsoftware.com/eLawSecure.nsf/SecureLogin?ReadForm')#put here the address of your page
+
+    user1_XPATH = "/html/body/form/table/tbody/tr[2]/td[1]/div/div/table/tbody/tr[1]/td[3]/input"
+    pass1_XPATH = "/html/body/form/table/tbody/tr[2]/td[1]/div/div/table/tbody/tr[2]/td[3]/input"
+    access_server_XPATH = "/html/body/form/table/tbody/tr[2]/td[1]/div/div/table/tbody/tr[3]/td[1]/div/input"
+
+
+    #find the elements to click and interact with
     user1 = driver.find_element_by_xpath(user1_XPATH)
     pass1 = driver.find_element_by_xpath(pass1_XPATH)
     access1 = driver.find_element_by_xpath(access_server_XPATH)
@@ -1809,36 +1868,41 @@ def double_docket_pull_call():
     pass1.send_keys("51698")
     access1.click()
     urlform2 = "https://www5.elawsoftware.com/1217/1217_Criminal.nsf/DocketReportSelection?OpenForm&t=1"
-    urlform3 = "https://www5.elawsoftware.com/1217/1217_Criminal.nsf/DocketReportSelection?OpenForm&Seq=1&t=1"
     driver.get(urlform2)
-    entered_date = next_business_day()
-    docket_date1 = driver.find_element_by_xpath("/html/body/form/div[3]/table/tbody/tr[6]/td/font[1]/input")
-    docket_date2 = driver.find_element_by_xpath("/html/body/form/div[3]/table/tbody/tr[6]/td/font[2]/input")
 
     def replace_values2():
-        docket_date1.clear()
-        docket_date1.send_keys(entered_date)
-        docket_date2.clear()
-        docket_date2.send_keys(entered_date)
-
+        entered_date1 = next_business_day()
+        docket2path = "/html/body/form/div[3]/table/tbody/tr[6]/td/font[2]/input"
+        wait = WebDriverWait(driver, 10)
+        docket1path = "/html/body/form/div[3]/table/tbody/tr[6]/td/font[1]/input"
+        wait.until(EC.presence_of_element_located((By.XPATH, docket1path)))
+        docket1 = driver.find_element_by_xpath("/html/body/form/div[3]/table/tbody/tr[6]/td/font[1]/input")
+        docket1.click()
+        keyboard.press_and_release('ctrl + a')
+        keyboard.press_and_release('delete')
+        docket1.click()
+        docket1.send_keys(converto())
+        wait = WebDriverWait(driver, 10)
+        wait.until(EC.presence_of_element_located((By.XPATH, docket2path)))
+        docket2 = driver.find_element_by_xpath(docket2path)
+        docket2.click()
+        keyboard.press_and_release('ctrl + a')
+        keyboard.press_and_release('delete')
+        docket2.click()
+        docket2.send_keys(converto())
     replace_values2()
-    urlform3_XPATH = "//*[@id=\"menu0\"]"
-
-    driver.find_element_by_xpath(urlform3_XPATH).click()
 
     def print2():
         keyboard.press_and_release('ctrl+shift+p')
         time.sleep(5)
-
-    # Print Elaw Docket
+    #Print Elaw Docket
     print2()
-    driver.close()
-
-    # Start TCDJ Docket search print
 
     def tcdj1():
-        url_tcdj = "https://publiccourts.traviscountytx.gov/dsa/#/"
+        driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
+        url_tcdj = ("https://publiccourts.traviscountytx.gov/dsa/#/")
         driver.get(url_tcdj)
+        wait = WebDriverWait(driver, 10)
         xpath_att1 = "/html/body/div/div/div/div[3]/div/span[2]/button"
         wait.until(EC.presence_of_element_located((By.XPATH, xpath_att1)))
         attorney2 = driver.find_element_by_xpath(xpath_att1)
@@ -1866,9 +1930,8 @@ def double_docket_pull_call():
         check = driver.find_element_by_xpath(xpath_checkbox)
         check.click()
         keyboard.press_and_release('ctrl+shift+p')
-        time.sleep(5)
+        time.sleep(15)
     tcdj1()
-
 
 open_amp()
 time.sleep(10)  # this is the fuse, will automatically start appointment iteration
@@ -1877,3 +1940,7 @@ time.sleep(10)  # this is the fuse, will automatically start appointment iterati
 double_docket_pull_call()
 time.sleep(60 * 10)
 driver.close()
+
+
+
+

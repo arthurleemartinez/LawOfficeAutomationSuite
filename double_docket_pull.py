@@ -1,38 +1,32 @@
-import urllib3
-import selenium
 import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-import requests
-from selenium.webdriver.common.keys import Keys
-import webbrowser
 import keyboard
 from selenium import webdriver
-from bs4 import BeautifulSoup
 from _datetime import datetime
 import datetime
 import holidays
 
-ONE_DAY = datetime.timedelta(days=1)
-HOLIDAYS_US = holidays.US()
 
 
 def next_business_day():
+    ONE_DAY = datetime.timedelta(days=1)
+    HOLIDAYS_US = holidays.US()
+    global next_day
     next_day = datetime.date.today() + ONE_DAY
-    global reformatted
-    reformatted = ""
     while next_day.weekday() in holidays.WEEKEND or next_day in HOLIDAYS_US:
         next_day += ONE_DAY
-        day = str(next_day.day)
-        d1 = "/"
-        month = str(next_day.month)
-        yr = str(next_day.year)
-        asd = month + d1 + day + d1 + yr
-        reformatted = asd
-    return reformatted
+    return next_day
 
+def converto():
+    day = str(next_day.day)
+    d1 = "/"
+    month = str(next_day.month)
+    yr = str(next_day.year)
+    asd = month + d1 + day + d1 + yr
+    return asd
 
 
 driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
@@ -51,30 +45,35 @@ user1.send_keys("Leonard.martinez")
 pass1.send_keys("")
 access1.click()
 urlform2 = "https://www5.elawsoftware.com/1217/1217_Criminal.nsf/DocketReportSelection?OpenForm&t=1"
-urlform3 = "https://www5.elawsoftware.com/1217/1217_Criminal.nsf/DocketReportSelection?OpenForm&Seq=1&t=1"
 driver.get(urlform2)
-entered_date = next_business_day()
-docket_date1 = driver.find_element_by_xpath("/html/body/form/div[3]/table/tbody/tr[6]/td/font[1]/input")
-docket_date2 = driver.find_element_by_xpath("/html/body/form/div[3]/table/tbody/tr[6]/td/font[2]/input")
 
 def replace_values2():
-    docket_date1.clear()
-    docket_date1.send_keys(entered_date)
-    docket_date2.clear()
-    docket_date2.send_keys(entered_date)
-
+    entered_date1 = next_business_day()
+    docket2path = "/html/body/form/div[3]/table/tbody/tr[6]/td/font[2]/input"
+    wait = WebDriverWait(driver, 10)
+    docket1path = "/html/body/form/div[3]/table/tbody/tr[6]/td/font[1]/input"
+    wait.until(EC.presence_of_element_located((By.XPATH, docket1path)))
+    docket1 = driver.find_element_by_xpath("/html/body/form/div[3]/table/tbody/tr[6]/td/font[1]/input")
+    docket1.click()
+    keyboard.press_and_release('ctrl + a')
+    keyboard.press_and_release('delete')
+    docket1.click()
+    docket1.send_keys(converto())
+    wait = WebDriverWait(driver, 10)
+    wait.until(EC.presence_of_element_located((By.XPATH, docket2path)))
+    docket2 = driver.find_element_by_xpath(docket2path)
+    docket2.click()
+    keyboard.press_and_release('ctrl + a')
+    keyboard.press_and_release('delete')
+    docket2.click()
+    docket2.send_keys(converto())
 replace_values2()
-urlform3_XPATH = "//*[@id=\"menu0\"]"
-
-driver.find_element_by_xpath(urlform3_XPATH).click()
 
 def print2():
     keyboard.press_and_release('ctrl+shift+p')
     time.sleep(5)
 #Print Elaw Docket
 print2()
-driver.close()
-#Start TCDJ Docket search print
 
 def tcdj1():
     driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')

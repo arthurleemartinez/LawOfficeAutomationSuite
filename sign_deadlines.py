@@ -64,6 +64,8 @@ def check_number_of_alerts_deadline_boxes():
         deadlines_count = 4
     elif xpath_deadline_1_number == "2" and deadline_number_5 == "2":
         deadlines_count = 5
+
+
 def return_searches():
     driver.get("https://courts.traviscountytx.gov/AMP/Cases/Search")
     wait.until(EC.presence_of_element_located((By.XPATH, user1_XPATH)))
@@ -92,6 +94,8 @@ def iterate_boxes_once():
     wait.until(EC.presence_of_element_located((By.XPATH, savepath_amp)))
     save_amp1 = driver.find_element_by_xpath(savepath_amp)
     save_amp1.click()
+
+
 def iterate_boxes_two():
     iterate_boxes_once()
     return_searches()
@@ -116,6 +120,8 @@ def iterate_boxes_two():
     wait.until(EC.presence_of_element_located((By.XPATH, savepath_amp)))
     save_amp1 = driver.find_element_by_xpath(savepath_amp)
     save_amp1.click()
+
+
 def iterate_boxes_three():
     iterate_boxes_two()
     return_searches()
@@ -140,6 +146,8 @@ def iterate_boxes_three():
     wait.until(EC.presence_of_element_located((By.XPATH, savepath_amp)))
     save_amp1 = driver.find_element_by_xpath(savepath_amp)
     save_amp1.click()
+
+
 def iterate_boxes_four():
     iterate_boxes_three()
     return_searches()
@@ -164,6 +172,8 @@ def iterate_boxes_four():
     wait.until(EC.presence_of_element_located((By.XPATH, savepath_amp)))
     save_amp1 = driver.find_element_by_xpath(savepath_amp)
     save_amp1.click()
+
+
 def iterate_boxes_five():
     iterate_boxes_four()
     return_searches()
@@ -189,6 +199,7 @@ def iterate_boxes_five():
     save_amp1 = driver.find_element_by_xpath(savepath_amp)
     save_amp1.click()
 
+
 def conditional2():
     if deadlines_count == 1:
         iterate_boxes_once()
@@ -204,13 +215,10 @@ def conditional2():
         pass
 
 def open_amp():
-    driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
+
     driver.get('https://idc.traviscountytx.gov/nidp/idff/sso?id=35&sid=2&option=credential&sid=2&target=https%3A%2F%2Fcourts.traviscountytx.gov%2Famp%2F')
-    user1_XPATH = "//*[@id=\"main_content\"]/div[2]/form/input[1]"
-    pass1_XPATH = "//*[@id=\"main_content\"]/div[2]/form/input[2]"
     access_server_XPATH = "//*[@id=\"main_content\"]/div[2]/form/div/p/input"
     # find the elements to click and interact with
-    wait = WebDriverWait(driver, 10)
     wait.until(EC.presence_of_element_located((By.XPATH, user1_XPATH)))
     user1 = driver.find_element_by_xpath(user1_XPATH)
     wait.until(EC.presence_of_element_located((By.XPATH, pass1_XPATH)))

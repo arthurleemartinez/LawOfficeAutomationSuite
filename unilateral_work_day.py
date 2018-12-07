@@ -166,7 +166,7 @@ def converto1():
 
 def business_day():
     month1 = "January"
-    month - month0
+    month = month0
     c1 = ","
     day = day0
     yr = yr0

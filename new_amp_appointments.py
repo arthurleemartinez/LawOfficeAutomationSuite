@@ -29,7 +29,7 @@ def open_amp():
     pass1 = driver.find_element_by_xpath(pass1_XPATH)
     wait.until(EC.presence_of_element_located((By.XPATH, access_server_XPATH)))
     access1 = driver.find_element_by_xpath(access_server_XPATH)
-    user1.send_keys("Sbn13142750")
+    user1.send_keys("")
     pass1.send_keys("")
     access1.click()
     driver.get("https://courts.traviscountytx.gov/AMP/Cases/Search")
@@ -48,6 +48,7 @@ def open_amp():
     wait.until(EC.presence_of_element_located((By.XPATH, xpath_startdate)))
     sd.send_keys(entered_date)
     xpath_search4 = "//*[@id=\"case-search\"]/div[3]/div[2]/ul/li[1]/button"
+    time.sleep(3)
     wait.until(EC.presence_of_element_located((By.XPATH, xpath_search4)))
     search4 = driver.find_element_by_xpath(xpath_search4)
     search4.click()

@@ -166,7 +166,7 @@ def converto1():
 
 def business_day():
     month1 = "January"
-    month = month0
+    month - month0
     c1 = ","
     day = day0
     yr = yr0
@@ -1141,6 +1141,7 @@ def open_amp():
     wait.until(EC.presence_of_element_located((By.XPATH, xpath_startdate)))
     sd.send_keys(entered_date)
     xpath_search4 = "//*[@id=\"case-search\"]/div[3]/div[2]/ul/li[1]/button"
+    time.sleep(5)
     wait.until(EC.presence_of_element_located((By.XPATH, xpath_search4)))
     search4 = driver.find_element_by_xpath(xpath_search4)
     search4.click()
@@ -1940,7 +1941,6 @@ time.sleep(10)  # this is the fuse, will automatically start appointment iterati
 double_docket_pull_call()
 time.sleep(60 * 10)
 driver.close()
-
 
 
 

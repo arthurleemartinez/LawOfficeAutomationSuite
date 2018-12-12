@@ -119,4 +119,5 @@ def tcdj1():
     keyboard.press_and_release('enter')
     keyboard.press_and_release('enter')
     time.sleep(15)
+    driver.close()
 tcdj1()

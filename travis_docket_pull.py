@@ -60,4 +60,5 @@ def tcdj1():
     check.click()
     keyboard.press_and_release('ctrl+shift+p')
     time.sleep(15)
+    driver.close()
 tcdj1()

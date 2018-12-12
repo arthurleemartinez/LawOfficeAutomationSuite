@@ -21,7 +21,7 @@ def next_business_day():
     while next_day.weekday() in holidays.WEEKEND or next_day in HOLIDAYS_US:
         next_day += ONE_DAY
     return next_day
-
+next_business_day()
 def converto():
     day = str(next_day.day)
     d1 = "/"
@@ -61,13 +61,14 @@ def replace_values2():
     docket_date2.send_keys(entered_date)
 
 replace_values2()
-urlform3_XPATH = "//*[@id=\"menu0\"]"
+urlform3_XPATH = "//*[@id=\"qmim0\"]"
 
 driver.find_element_by_xpath(urlform3_XPATH).click()
 
 def print2():
+    time.sleep(2)
     keyboard.press_and_release('ctrl+shift+p')
-    time.sleep(10)
+    time.sleep(5)
     keyboard.press_and_release('enter')
     keyboard.press_and_release('enter')
 

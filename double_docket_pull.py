@@ -69,9 +69,20 @@ def replace_values2():
     docket2.send_keys(converto())
 replace_values2()
 
+urlform3_xpath = "//*[@id=\"menu0\"]"
+wait = WebDriverWait(driver, 10)
+xpath_texto = "/html/body/form/div[3]/table/tbody/tr[1]/td/div/b/font"
+wait.until(EC.presence_of_element_located((By.XPATH, xpath_texto)))
+texto = driver.find_element_by_xpath(xpath_texto)
+texto.click()
+wait.until(EC.presence_of_element_located((By.XPATH, urlform3_xpath)))
+
+driver.find_element_by_xpath(urlform3_xpath).click()
+
+
 def print2():
     keyboard.press_and_release('ctrl+shift+p')
-    time.sleep(5)
+    time.sleep(10)
 #Print Elaw Docket
 print2()
 driver.close()
@@ -107,6 +118,7 @@ def tcdj1():
     wait.until(EC.presence_of_element_located((By.XPATH, xpath_checkbox)))
     check = driver.find_element_by_xpath(xpath_checkbox)
     check.click()
+    time.sleep(2)
     keyboard.press_and_release('ctrl+shift+p')
     time.sleep(15)
     driver.close()

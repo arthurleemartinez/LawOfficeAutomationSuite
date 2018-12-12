@@ -21,7 +21,7 @@ def next_business_day():
     while next_day.weekday() in holidays.WEEKEND or next_day in HOLIDAYS_US:
         next_day += ONE_DAY
     return next_day
-
+next_business_day()
 def converto():
     day = str(next_day.day)
     d1 = "/"
@@ -59,16 +59,20 @@ def replace_values2():
     docket_date1.send_keys(entered_date)
     docket_date2.clear()
     docket_date2.send_keys(entered_date)
-
+    keyboard.press_and_release('enter')
 replace_values2()
-urlform3_XPATH = "//*[@id=\"menu0\"]"
 
-driver.find_element_by_xpath(urlform3_XPATH).click()
+urlform3_xpath = "//*[@id=\"menu0\"]"
+wait = WebDriverWait(driver, 10)
+xpath_texto = "/html/body/form/div[3]/table/tbody/tr[1]/td/div/b/font"
+wait.until(EC.presence_of_element_located((By.XPATH, xpath_texto)))
+texto = driver.find_element_by_xpath(xpath_texto)
+texto.click()
+wait.until(EC.presence_of_element_located((By.XPATH, urlform3_xpath)))
 
-def print2():
-    time.sleep(5*60)
-#Print Elaw Docket
-print2()
+driver.find_element_by_xpath(urlform3_xpath).click()
+
+time.sleep(35)
 driver.close()
 #Start TCDJ Docket search print
 
@@ -103,5 +107,6 @@ def tcdj1():
     wait.until(EC.presence_of_element_located((By.XPATH, xpath_checkbox)))
     check = driver.find_element_by_xpath(xpath_checkbox)
     check.click()
-    time.sleep(60*5)
+    time.sleep(60*3)
+    driver.close()
 tcdj1()

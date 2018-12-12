@@ -1832,6 +1832,8 @@ def create_elaw_appointments():
 
 
 def double_docket_pull_call():
+    ONE_DAY = datetime.timedelta(days=1)
+    HOLIDAYS_US = holidays.US()
 
 
     def next_business_day():
@@ -1842,8 +1844,7 @@ def double_docket_pull_call():
         while next_day.weekday() in holidays.WEEKEND or next_day in HOLIDAYS_US:
             next_day += ONE_DAY
         return next_day
-
-
+    next_business_day()
     def converto():
         day = str(next_day.day)
         d1 = "/"
@@ -1851,6 +1852,7 @@ def double_docket_pull_call():
         yr = str(next_day.year)
         asd = month + d1 + day + d1 + yr
         return asd
+
 
 
     driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
@@ -1869,35 +1871,41 @@ def double_docket_pull_call():
     pass1.send_keys("51698")
     access1.click()
     urlform2 = "https://www5.elawsoftware.com/1217/1217_Criminal.nsf/DocketReportSelection?OpenForm&t=1"
+    urlform3 = "https://www5.elawsoftware.com/1217/1217_Criminal.nsf/DocketReportSelection?OpenForm&Seq=1&t=1"
     driver.get(urlform2)
+    entered_date = converto()
+    docket_date1 = driver.find_element_by_xpath("/html/body/form/div[3]/table/tbody/tr[6]/td/font[1]/input")
+    docket_date2 = driver.find_element_by_xpath("/html/body/form/div[3]/table/tbody/tr[6]/td/font[2]/input")
 
     def replace_values2():
-        entered_date1 = next_business_day()
-        docket2path = "/html/body/form/div[3]/table/tbody/tr[6]/td/font[2]/input"
-        wait = WebDriverWait(driver, 10)
-        docket1path = "/html/body/form/div[3]/table/tbody/tr[6]/td/font[1]/input"
-        wait.until(EC.presence_of_element_located((By.XPATH, docket1path)))
-        docket1 = driver.find_element_by_xpath("/html/body/form/div[3]/table/tbody/tr[6]/td/font[1]/input")
-        docket1.click()
-        keyboard.press_and_release('ctrl + a')
-        keyboard.press_and_release('delete')
-        docket1.click()
-        docket1.send_keys(converto())
-        wait = WebDriverWait(driver, 10)
-        wait.until(EC.presence_of_element_located((By.XPATH, docket2path)))
-        docket2 = driver.find_element_by_xpath(docket2path)
-        docket2.click()
-        keyboard.press_and_release('ctrl + a')
-        keyboard.press_and_release('delete')
-        docket2.click()
-        docket2.send_keys(converto())
+        docket_date1.clear()
+        docket_date1.send_keys(entered_date)
+        docket_date2.clear()
+        docket_date2.send_keys(entered_date)
+        keyboard.press_and_release('enter')
     replace_values2()
 
+    urlform3_xpath = "//*[@id=\"menu0\"]"
+    wait = WebDriverWait(driver, 10)
+    xpath_texto = "/html/body/form/div[3]/table/tbody/tr[1]/td/div/b/font"
+    wait.until(EC.presence_of_element_located((By.XPATH, xpath_texto)))
+    texto = driver.find_element_by_xpath(xpath_texto)
+    texto.click()
+    wait.until(EC.presence_of_element_located((By.XPATH, urlform3_xpath)))
+
+    driver.find_element_by_xpath(urlform3_xpath).click()
+
     def print2():
+        time.sleep(2)
         keyboard.press_and_release('ctrl+shift+p')
         time.sleep(5)
+        keyboard.press_and_release('enter')
+        keyboard.press_and_release('enter')
+
     #Print Elaw Docket
     print2()
+    driver.close()
+    #Start TCDJ Docket search print
 
     def tcdj1():
         driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
@@ -1931,9 +1939,11 @@ def double_docket_pull_call():
         check = driver.find_element_by_xpath(xpath_checkbox)
         check.click()
         keyboard.press_and_release('ctrl+shift+p')
+        keyboard.press_and_release('enter')
+        keyboard.press_and_release('enter')
         time.sleep(15)
     tcdj1()
-
+    
 open_amp()
 time.sleep(10)  # this is the fuse, will automatically start appointment iteration
 # which will also start find_appointment_info and replacedocvalues/print
@@ -1941,6 +1951,5 @@ time.sleep(10)  # this is the fuse, will automatically start appointment iterati
 double_docket_pull_call()
 time.sleep(60 * 10)
 driver.close()
-
 
 

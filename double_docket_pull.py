@@ -74,6 +74,7 @@ def print2():
     time.sleep(5)
 #Print Elaw Docket
 print2()
+driver.close()
 
 def tcdj1():
     driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
@@ -108,4 +109,5 @@ def tcdj1():
     check.click()
     keyboard.press_and_release('ctrl+shift+p')
     time.sleep(15)
+    driver.close()
 tcdj1()

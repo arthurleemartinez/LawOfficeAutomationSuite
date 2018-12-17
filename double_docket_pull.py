@@ -78,7 +78,7 @@ texto.click()
 wait.until(EC.presence_of_element_located((By.XPATH, urlform3_xpath)))
 
 driver.find_element_by_xpath(urlform3_xpath).click()
-
+time.sleep(1)
 
 def print2():
     keyboard.press_and_release('ctrl+shift+p')

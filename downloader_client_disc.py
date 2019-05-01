@@ -22,24 +22,23 @@ def open_techshare():
   answer = prompt()
   print("Opening chrome robot...")
   driver = webdriver.Chrome(executable_path='C:/Users/Arthur Martinez/chromedriver.exe')
-   # 12 SECONDS TO LET LOAD
-   # access url
   print("Loading TechShare...")
+  driver.get("https://attorney.cuc.org/Ember#/service")
   wait = WebDriverWait(driver, 15)
-   """ user1_css = "td[class=\"ember-view ember-text-field required\"][data-key=\"username\"]"
-   pass1_css = "td[class=\"ember-view ember-text-field required\"][data-key=\"password\"]"
-   access_server_XPATH = "//*[@id=\"loginButton\"]"
-   # find the elements to click and interact with
-   wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, user1_css)))
-   user1 = driver.find_element_by_css_selector(user1_css)
-   wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, pass1_css)))
-   pass1 = driver.find_element_by_css_selector(pass1_css)
-   print("Logging in...")
-   wait.until(EC.presence_of_element_located((By.XPATH, access_server_XPATH)))
-   access1 = driver.find_element_by_xpath(access_server_XPATH)
-   user1.send_keys("Lmartinez1314")
-   pass1.send_keys("Lm13142750*")
-   access1.click()"""
+  user1_css = "td[class=\"ember-view ember-text-field required\"][data-key=\"username\"]"
+  pass1_css = "td[class=\"ember-view ember-text-field required\"][data-key=\"password\"]"
+  access_server_XPATH = "//*[@id=\"loginButton\"]"
+  # find the elements to click and interact with
+  wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, user1_css)))
+  user1 = driver.find_element_by_css_selector(user1_css)
+  wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, pass1_css)))
+  pass1 = driver.find_element_by_css_selector(pass1_css)
+  print("Logging in...")
+  wait.until(EC.presence_of_element_located((By.XPATH, access_server_XPATH)))
+  access1 = driver.find_element_by_xpath(access_server_XPATH)
+  user1.send_keys("")
+  pass1.send_keys("")
+  access1.click()
   casewords = ["c-1", "C1", "C-1", "c1", "D-1", "d-1", "d1", "D1"]
   print("Figuring out what information you gave me...")
   if ".org" not in answer:
@@ -102,6 +101,7 @@ def open_techshare():
       quit()
 
 
+
 def dropboxDump():
   directory_template = "C:/Users/Angelica Law Office/Dropbox/My Documents/Open Criminal State Cases/"
   downloads_directory = "C:/Users/Angelica Law Office/Downloads"
@@ -127,3 +127,5 @@ print("Files are downloading...")
 print("Do not close. This program will self-destruct when your files are done being distributed.")
 time.sleep(60*60)
 quit()
+
+

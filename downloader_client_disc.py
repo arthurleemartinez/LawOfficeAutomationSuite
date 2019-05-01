@@ -12,9 +12,10 @@ import zipfile
 singular_globa_name = ""
 
 def prompt():
-  answer = input("Copy and paste the url here and hit enter. If you have a case number please type/paste it here as well and hit enter.")
+  answer = input("Type the name of the client whose discovery you need. Or copy and paste the case's TechShare url here and hit enter. If you have a case number please type/paste it here as well and hit enter.")
   print("Response accepted. Accessing TechShare...")
   return answer
+  #tab twelve times then enter to get to first defendent in returned serarch
 
 
 def open_techshare():
@@ -101,7 +102,6 @@ def open_techshare():
       quit()
 
 
-
 def dropboxDump():
   directory_template = "C:/Users/Angelica Law Office/Dropbox/My Documents/Open Criminal State Cases/"
   downloads_directory = "C:/Users/Angelica Law Office/Downloads"
@@ -127,5 +127,3 @@ print("Files are downloading...")
 print("Do not close. This program will self-destruct when your files are done being distributed.")
 time.sleep(60*60)
 quit()
-
-
